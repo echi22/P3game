@@ -1,0 +1,62 @@
+{% extends "researcher/base.html" %}
+
+
+
+
+            	{% block main_top %} <h1>Researchers Area</h1> {% endblock %}
+
+
+           	{% block main_body %}
+
+<h2>Utilities</h2>
+<div>
+  <ul>
+    <li>
+      <a href="/researcher/upload_proteins">upload proteins</a>
+    </li>
+    <li>
+      <form action="/researcher/load_proteins_from_server" method="post">
+                                {% csrf_token %}
+        <input type="submit" value="Load proteins from folder in server ">
+      </form>
+    </li>
+    <li>
+      <a href="/researcher/upload_classification">Upload Classification</a>
+    </li>
+    <li>
+      <a href="/researcher/download_comparisons" onclick="confirm('Download comparisons?');">Download Comparisons</a>
+    </li>
+    
+    <li>
+      <a href="/researcher/clear_scores" onclick="confirm('Clear scores?');return false;">Clear Scores</a>
+    </li>
+    <li>
+      <a href="/researcher/clear_game_instances" onclick="confirm('Clear game instances?');return false;">Clear Game Instances</a>
+    </li>
+    <li>
+      <a href="/researcher/clear_classification" onclick="confirm('Clear classification?');return false;">Clear Classification</a>
+    </li>
+    <li>
+      <a href="/researcher/clear_proteins" onclick="confirm('Clear proteins?');return false;">Clear Proteins</a>
+    </li>
+    <li>
+      <a href="/researcher/regenerate_protein_images" onclick="confirm('Regenerate protein images?');return false;">Re-generate protein images</a>
+    </li>
+    <li>
+          <form action="/researcher/simulate_cath" method="get">
+                                {% csrf_token %}
+                 <p>
+                   <label> Games: </label>
+                   <input type= "text" name="games" value="5"/>
+                   <input type="submit" value="Simulate cath and clusters"/>
+                 </p>
+                 
+      </form>
+    </li>
+    
+  </ul>
+
+</div>
+
+
+{% endblock %}

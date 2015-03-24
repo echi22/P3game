@@ -1,0 +1,63 @@
+<div id="registration" title="Create Account!" >
+  
+    <div id="registration_data">
+        <form name="registration" action="">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td align="right">
+                         Username:
+                    </td>
+                    <td>
+                        <input name="user_name_registration" size="15" id="user_name_registration" type="text"/><br/>
+                        <label class="error" for="user_name" id="username_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                         Name:
+                    </td>
+                    <td>
+                      <input name="first_name" size="15" id="first_name" type="text"/><br/>
+
+                        <label class="error" for="first_name" id="first_name_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                         Password:
+                    </td>
+                    <td>
+                        <input name="password" size="15" id="password" type="password"/><br/>
+
+                       <label class="error" for="password" id="password_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                          Confirm Password:
+                    </td>
+                    <td>
+                        <input name="password2" size="15" id="password2" type="password"/><br/>
+
+                        <label class="error" for="password2" size="15" id="password2_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                          E-mail:
+                    </td>
+                    <td>
+                        <input name="email" size="15" id="email" type="text"/><br/>
+           <label class="error" for="email" id="email_error">This field is required.</label>
+                    </td>
+                </tr>
+            </table>
+
+            <input id="create_account" value="Create" type="submit"/>
+        </form>
+    </div>
+    <div id="registration_result" style="display: none;">
+         <span id="registration_result_span"></span><br>
+    </div>
+</div>

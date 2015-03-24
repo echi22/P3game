@@ -1,0 +1,101 @@
+    <div class="puff border_blue equalheight" style="height: 410px;">
+            <h2 class="titleLarge padding_bottom8 margin_bottom border_bottom">Registrarse para jugar</h2>
+
+    <form action="/users/register" method="post">
+                                     {% csrf_token %}
+         <table>
+             <tr>
+                 <td>
+
+                   <label>
+                        Nombre de usuario:
+                    </label>
+                 </td>
+                 <td>
+                    <input type="text" class="nice-input" name="username" {% if username.data != 'none' %}value="{{username.data}}"{%endif%}>
+
+                </td>
+             </tr>
+             <tr>
+                 <td>
+
+                    <label>
+                        Contraseña:
+                    </label>
+                </td>
+                 <td>
+                    <input type="password" class="nice-input"  name="password" {% if pass.data != 'none' %}value="{{pass.data}}"{%endif%}>
+                </td>
+             </tr>
+             <tr>
+                 <td>
+
+                    <label>
+                         Repetir Contraseña:
+                    </label>
+                </td>
+                 <td>
+                    <input type="password" class="nice-input"  name="password2" {% if pass2.data != 'none' %}value="{{pass2.data}}"{%endif%}>
+                </td>
+             </tr>
+            <tr>
+                 <td>
+
+                   <label>
+                     Email
+                    </label>
+                  </td>
+                 <td>
+                    <input type="text" class="nice-input" name="email" {% if email.data != 'none' %}value="{{email.data}}"{%endif%}>
+                </td>
+             </tr>
+             <tr>
+                 <td>
+
+                   <label>
+                     Fecha de Nacimiento
+                    </label>
+                  </td>
+                 <td>
+                    <input type="date" placeholder="dd/mm/aaaa" lang="es" class="nice-input" name="birthday" {% if birthday.data != 'none' %}value="{{birthday.data}}"{%endif%}>
+                </td>
+             </tr>
+             <tr>
+                 <td colspan="2">
+
+                   <label>
+                     Ya he visto proteinas antes
+                    </label>
+                  
+                    <input type="checkbox"  name="knows_proteins">
+                </td>
+             </tr>
+              <tr>
+                 <td colspan="2">
+
+                   <label>
+                     <i>Entiendo que el juego está en etapa de desarrollo y, si bien es estable, podría experimentar algún tipo de falla.</i> 
+                    </label>
+                  
+                    <input type="checkbox"  name="game_is_beta">
+                </td>
+             </tr>
+             <tr  >
+                 <td colspan="2" height="40px;" align="center" valign="bottom">
+                        <input type="submit" id="register" value="Registrarse">
+
+                 </td>
+             </tr>
+             <tr>
+                            	<td colspan="2">{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    {% if message.tags == 'register error' %}
+    <li class="{{ message.tags }}"style="font-size: 14px; color: red;">{{ message }}</li>{% endif %} 
+    {% endfor %}
+</ul>
+{% endif %}</td>
+                            </tr>
+         </table>
+        </form>
+    </div>

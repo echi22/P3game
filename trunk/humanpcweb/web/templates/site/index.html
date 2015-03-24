@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{%block extraJs %}
+<script>
+	$(function() {
+		$( "input:submit, a, button", ".left_column" ).button();
+		$( "input:submit, a, button", ".center_column" ).button();
+		$( "input:submit, a, button", ".right_column" ).button();
+	});
+
+</script>
+{% endblock %}
+{% block main %}
+
+<div id="banner"   >
+    <img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" width="200px">
+</div>
+    <div style="clear: both"></div>
+    
+    
+    {% if not user.is_authenticated %}
+    <div class="left_column" >
+    	{% include  "site/widgets/login.html" %}
+    </div> 
+    <div class="right_column">
+    	{% include  "site/widgets/register.html" %}
+    </div> 
+    {% else %}
+    <div class="center_column" >
+        {% include  "site/widgets/login_registered.html" %}
+    </div> 
+    {% endif %}
+
+    <div style="clear:both"></div>
+    
+
+
+    
+{% endblock %}
+
+
+
+            

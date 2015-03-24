@@ -1,0 +1,573 @@
+SCOP (4)
+   a (2)
+      a.1 (2)
+         a.1.1 (2)
+            a.1.1.2 (16)
+               d1yihc1
+               d1o1jd_
+               d1k0ya_
+               d1haba_
+               d1mwca_
+               d1hbbd_
+               d1nwia_
+               d2gtlj1
+               d1f5pa_
+               d1xyeb_
+               d1f5pb_
+               d1myja_
+               d1j41g_
+               d1jp9a_
+               d2g0xa1
+               d1w92a_
+            a.1.1.3 (16)
+               d1gh0u_
+               d1ha7c_
+               d1ha7n_
+               d1f99n_
+               d1f99k_
+               d2uumi1
+               d1ha7s_
+               d2uumk1
+               d2uume1
+               d1jboa_
+               d1f99b_
+               d1qgwc_
+               d1gh0m_
+               d1ha7x_
+               d1eyxb_
+               d1on7b_
+         a.1.2 (2)
+            a.1.2.1 (16)
+               d1qlbe1
+               d2aczb1
+               d1kfyb1
+               d1kfyn1
+               d1l0vn1
+               d1kf6n1
+               d1e7pb1
+               d1l0vb1
+               d1e7pe1
+               d2bs4b1
+               d3cirn1
+               d1nekb1
+               d2bs3b1
+               d2b76n1
+               d1e7pk1
+               d1nenb1
+            a.1.2.2 (16)
+               d1gtha1
+               d1gthd1
+               d1gted1
+               d1h7xd1
+               d1gtec1
+               d1h7wa1
+               d1gt8a1
+               d1h7xb1
+               d1gt8c1
+               d1gtea1
+               d1h7xa1
+               d1h7wb1
+               d1h7xc1
+               d1h7wc1
+               d1h7wd1
+               d1gt8d1
+      a.4 (2)
+         a.4.13 (2)
+            a.4.13.1 (16)
+               d2a6ep1
+               d1iw7p1
+               d1rp3a1
+               d2a68f1
+               d2cw0f1
+               d1sc5a1
+               d1rp3e1
+               d2a6ef1
+               d1rp3g1
+               d2be5p1
+               d2cw0p1
+               d1ku2a1
+               d1zyrp1
+               d1smyp1
+               d1smyf1
+               d2a69p1
+            a.4.13.2 (16)
+               d1sc5a2
+               d1ku7d_
+               d1smyp2
+               d2a69f2
+               d1rp3c2
+               d1rp3a2
+               d2a6hp2
+               d2cw0f2
+               d1rp3g2
+               d1ku3a_
+               d1ttya_
+               d1rioh_
+               d2cw0p2
+               d1zyrp2
+               d1ku7a_
+               d2p7vb1
+         a.4.6 (2)
+            a.4.6.2 (16)
+               d1zg5e1
+               d1a04a1
+               d1h0mc1
+               d1zg5f1
+               d1fsed_
+               d1zg1f1
+               d1h0md1
+               d1l3lb1
+               d1zg1b1
+               d1rnla1
+               d1fsee_
+               d1je8f_
+               d1p4wa_
+               d1zg5b1
+               d1je8a_
+               d1a04b1
+            a.4.6.1 (16)
+               d1ys7a1
+               d1gxpb_
+               d1p2fa1
+               d1odda_
+               d1gxqa_
+               d1gxpe_
+               d1opca_
+               d1ys6b1
+               d1ys7b1
+               d1ys6a1
+               d2z33a1
+               d1kgsa1
+               d2jpba1
+               d1qqia_
+               d2feza1
+               d2ff4a1
+   d (2)
+      d.15 (2)
+         d.15.4 (2)
+            d.15.4.1 (16)
+               d1oqqb_
+               d1pfda_
+               d1fxaa_
+               d2cjna_
+               d1yjja1
+               d1i7ha_
+               d1e0za_
+               d1ewyc_
+               d1i7hc_
+               d1qogb_
+               d1xlpa1
+               d1xlob1
+               d1a70a_
+               d1qt9a_
+               d1xlqa1
+               d1cjec_
+            d.15.4.2 (16)
+               d1jrpa2
+               d1jrpc2
+               d1zcsa2
+               d1ffua2
+               d2fug33
+               d1qlbb2
+               d3cirn2
+               d1sb3f2
+               d1sb3c2
+               d1qlbe2
+               d1ffvd2
+               d2bs2b2
+               d1jroe2
+               d1vdvb2
+               d1t3qd2
+               d1v97a2
+         d.15.1 (2)
+            d.15.1.4 (16)
+               d1sgha3
+               d2d11d3
+               d2d11b3
+               d1ni2a3
+               d2d2qa3
+               d2d10b3
+               d2al6b3
+               d1ef1a3
+               d2emtb3
+               d1ni2b3
+               d1gg3c3
+               d2d2qb3
+               d2zpya3
+               d2d11a3
+               d2emta3
+               d1isna3
+            d.15.1.5 (16)
+               d2rgfa_
+               d1lxda_
+               d2c5ld1
+               d1raxa_
+               d1rfaa_
+               d1guab_
+               d1i35a_
+               d2cs4a1
+               d1e8za3
+               d1e8ya3
+               d1e8wa3
+               d1wgya_
+               d1ef5a_
+               d1rrba_
+               d1e7va3
+               d2c5lc1
+      d.129 (2)
+         d.129.3 (2)
+            d.129.3.3 (16)
+               d1ulic2
+               d2de6b2
+               d1o7na2
+               d2de5a2
+               d1uljc2
+               d1ulja2
+               d2de7a2
+               d2de5c2
+               d1ndoe2
+               d2b1xc2
+               d2hmka2
+               d2b1xa2
+               d2de7b2
+               d2b24e2
+               d2b1xe2
+               d1o7ma2
+            d.129.3.5 (16)
+               d1z94e1
+               d1x53a1
+               d2gkda1
+               d1zxfa1
+               d3elia1
+               d1z94f1
+               d1z94c1
+               d2gkca1
+               d2nn5a1
+               d2k5ga1
+               d1z94a1
+               d1xuvc_
+               d1z94b1
+               d1xfsa_
+               d2il5a1
+               d1xuva_
+         d.129.1 (2)
+            d.129.1.2 (16)
+               d2i5wa2
+               d2noha2
+               d3cwad2
+               d3cwtb2
+               d3cwuc2
+               d1yqma2
+               d3cw7b2
+               d3cwsb2
+               d1n39a2
+               d1lwwa2
+               d1lwva2
+               d1m3ha2
+               d3d4va2
+               d1hu0a2
+               d3cw7d2
+               d1yqra2
+            d.129.1.1 (16)
+               d1aisa1
+               d1qncb1
+               d1qnca2
+               d1ytbb2
+               d1volb2
+               d1tbpb1
+               d1qnca1
+               d1qnea2
+               d1pcza2
+               d1qn7b1
+               d1qn9a1
+               d1qn8a2
+               d1qn7a1
+               d1qn8b2
+               d1ytfa2
+               d1pczb2
+   c (2)
+      c.23 (2)
+         c.23.5 (2)
+            c.23.5.8 (16)
+               d1zwka1
+               d2a5lb1
+               d1ydgg_
+               d1ydge_
+               d1yrha1
+               d1ydgd_
+               d1yrhe1
+               d1ydgc_
+               d1zwla1
+               d2arkc1
+               d1yrhb1
+               d1ydgf_
+               d1ydgb_
+               d2arkf1
+               d1yrhg1
+               d1yrhf1
+            c.23.5.3 (16)
+               d1kbqc_
+               d2f1of1
+               d2bzsb1
+               d2z9db1
+               d2qx4b1
+               d2qr2a_
+               d1dxqa_
+               d2f1oh1
+               d2z98a1
+               d1sg0b1
+               d2qwxb1
+               d1d4aa_
+               d1kboa_
+               d2qx9b1
+               d1qbgb_
+               d2qmyb1
+         c.23.14 (2)
+            c.23.14.1 (16)
+               d2a0kb1
+               d2f2tb1
+               d1f8yb_
+               d2f67a1
+               d1s3fa_
+               d1f8xb_
+               d1s2ic_
+               d2f64b1
+               d1s2ga_
+               d1s2lb_
+               d1s2dc_
+               d1s2gc_
+               d1s2la_
+               d1s2ia_
+               d1s2db_
+               d1f8ya_
+            c.23.14.3 (16)
+               d1isib_
+               d1lbea_
+               d1isha_
+               d1r0sa_
+               d1r15g_
+               d1r16b_
+               d1r12b_
+               d1isfa_
+               d1r15e_
+               d1ishb_
+               d1r15b_
+               d1isjb_
+               d1r15a_
+               d1isja_
+               d1isfb_
+               d2ef1a1
+      c.26 (2)
+         c.26.2 (2)
+            c.26.2.4 (16)
+               d1tq8a_
+               d1q77b_
+               d1tq8b_
+               d2gm3b1
+               d1tq8f_
+               d1tq8d_
+               d2gm3a1
+               d1mjhb_
+               d2gm3c1
+               d1mjha_
+               d1jmvb_
+               d2ielb1
+               d2z3va1
+               d1jmva_
+               d1jmvd_
+               d1jmvc_
+            c.26.2.3 (16)
+               d2a1ts1
+               d1o97d1
+               d1o97c_
+               d2a1ua1
+               d3cluc1
+               d3cltc1
+               d3clud1
+               d1efpb_
+               d3clsc1
+               d1o95c_
+               d3clrd1
+               d1o94c_
+               d1o95e_
+               d1o95f_
+               d1efva1
+               d1efpd_
+         c.26.1 (2)
+            c.26.1.5 (16)
+               d1m8pc2
+               d1g8ga2
+               d1xjqa2
+               d1x6vb2
+               d1j70c2
+               d1jeca2
+               d1xnjb2
+               d1j70b2
+               d1j70a2
+               d1xnja2
+               d1g8gb2
+               d1g8fa2
+               d1jhda2
+               d1jeda2
+               d1jeeb2
+               d1i2da2
+            c.26.1.4 (16)
+               d1n2gb_
+               d1n2ia_
+               d3cozb1
+               d1n2eb_
+               d1n2ea_
+               d1n2ba_
+               d3cova1
+               d1n2ob_
+               d3cowb1
+               d1n2hb_
+               d1n2ja_
+               d1ihoa_
+               d3coza1
+               d3covb1
+               d1n2ga_
+               d2a7xa1
+   b (2)
+      b.34 (2)
+         b.34.5 (2)
+            b.34.5.6 (16)
+               d2awbp1
+               d2gycn1
+               d2aw4p1
+               d1vs6p1
+               d2j03t1
+               d1xbpn1
+               d2j01t1
+               d2zjrm1
+               d1vs8p1
+               d2i2vp1
+               d2gyan1
+               d2zjqm1
+               d2v49t1
+               d2zjpm1
+               d2v47t1
+               d2j28p1
+            b.34.5.1 (16)
+               d2qbiu1
+               d2qamu1
+               d1vqmq1
+               d1m1kr_
+               d2gyas1
+               d3d5by1
+               d1yj9t1
+               d1q7yu_
+               d1m90u_
+               d1vsps1
+               d2otjt1
+               d1k73u_
+               d1vsas1
+               d2rdou1
+               d1qvgp_
+               d1vq6t1
+         b.34.1 (2)
+            b.34.1.2 (16)
+               d1byma_
+               d1bi1a3
+               d1g3ta3
+               d1c0wa3
+               d2gcxa1
+               d1g3wa3
+               d1u8rd3
+               d1bi0a3
+               d1c0wc3
+               d1u8rc3
+               d1fx7a3
+               d1g3sa3
+               d1u8rg3
+               d1u8ri3
+               d1qw1a1
+               d1c0wd3
+            b.34.1.1 (16)
+               d2ejfb1
+               d1wqwb1
+               d2e41b1
+               d2dkgb1
+               d1wpya1
+               d2e64a1
+               d2zgwa1
+               d2ejfa1
+               d2dtib1
+               d1wnlb1
+               d2dkga1
+               d1wpyb1
+               d2ewnb2
+               d1hxda2
+               d1wq7b1
+               d1biba2
+      b.40 (2)
+         b.40.2 (2)
+            b.40.2.2 (16)
+               d2qila1
+               d1l0xb1
+               d1jckb1
+               d1ty2c1
+               d1ts5b1
+               d1ktkc1
+               d1sxta1
+               d1i4ra1
+               d1ktkd1
+               d1jwud1
+               d1l0yd1
+               d1jwmd1
+               d1aw7b1
+               d1aw7d1
+               d2qilb1
+               d1sbbd1
+            b.40.2.1 (16)
+               d1czwb_
+               d2c5cj1
+               d2chbg_
+               d1pzig_
+               d1dm0k_
+               d3efxi1
+               d1lt6f_
+               d1czgb_
+               d2o2li1
+               d1qohl_
+               d1s5ek_
+               d1chqf_
+               d1g8zh_
+               d1bosi_
+               d1ptof_
+               d1ltsd_
+         b.40.6 (2)
+            b.40.6.1 (16)
+               d1gunb_
+               d1fr3l_
+               d1fr3k_
+               d1fr3d_
+               d1fr3b_
+               d1gugd_
+               d1fr3e_
+               d1guob_
+               d1guge_
+               d1fr3f_
+               d1gusc_
+               d1guta_
+               d1gutf_
+               d1guod_
+               d1gune_
+               d1gusd_
+            b.40.6.2 (16)
+               d1h9sa2
+               d1b9na4
+               d1b9na3
+               d1h9ja2
+               d1h9ka1
+               d1b9mb4
+               d1o7la3
+               d1h9ma1
+               d1h9rb1
+               d1h9mb1
+               d1h9rb2
+               d1h9ka2
+               d1o7ld3
+               d1o7lb2
+               d1o7ld2
+               d1o7lc3

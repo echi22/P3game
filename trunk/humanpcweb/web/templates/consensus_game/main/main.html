@@ -1,0 +1,96 @@
+ <div id="game">
+                <table>
+                    {% include  "consensus_game/main/admin_information.html" %}
+                    <tr>
+                        <td style="vertical-align: top;"> 
+							<div style="width: 100%">
+								<div style="width: 50%;float: left;text-align: center;">
+									<span class="totalScore" style="font-size:24px;">Nivel</span>
+									<span  class="otherscore" style="font-size:34px;" id="user_level"></span>
+								</div>
+									
+								<div style="width: 50%; float: left;text-align: center;">
+									<span class="totalScore" style="font-size:20px;">Aciertos totales</span>
+									<span  class="otherscore" id="avg_score" style="font-size:34px;"></span>
+								</div>															
+							</div>
+							<div style="clear: both"></div>
+							<div id="customContainer" style="width: 300px;padding: 10px; text-align: center;">
+						        <img src="{{STATIC_URL}}images/tutorial.png" style="cursor:pointer" id="tutorialImage" alt="Ayuda"/>
+						    </div>
+                        </td>
+                        <td>
+                        {% include "consensus_game/main/protein0.html" %}
+                        </td>
+                        <td style="vertical-align: top; " class="prueba">
+                            {% include "consensus_game/scoreBoard.html" with list1="0" list2="0123456789" %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                        {% include "consensus_game/main/protein1.html" %}
+                        </td>
+                        <td style="text-align: center;">    
+                        	<div id="nextButtonContainer" style="margin-top:-40px;">
+                        	<a onclick="location.reload()"  style="cursor:pointer;" id="reload" class="classname recargar">¿No se ve una proteína? Recargar trío</a>
+                        	<a style="display:none; cursor:pointer;"  id="send" class="classname next">Siguiente  trío</a>
+                        	                  
+                                   
+                                <h4 style="color:#FFFFFF;text-align:center;margin-top:40px;" ></h4>
+                                <input type="checkbox"  id="spin" checked="checked"/> 
+                                 <h4 style="color:#FFFFFF;text-align:center">Girar</h4>
+                        </td>
+                        <td>                        
+                        {% include "consensus_game/main/protein2.html" %}
+                        </td>
+                    </tr>
+                    
+
+                </table>
+</div>
+
+<style type="text/css">
+.recargar{
+	height:46px;
+	line-height:18px;
+	width:144px;
+}
+.next{
+height:33px;
+	line-height:33px;
+	width:113px;}
+.classname {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #666066;
+	display:inline-block;
+	color:#000000;
+	font-family:arial;
+	font-size:11px;
+	font-weight:bold;
+	font-style:normal;
+	
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+}.classname:hover {
+	background-color:#dfdfdf;
+}.classname:active {
+	position:relative;
+	top:1px;
+}</style>

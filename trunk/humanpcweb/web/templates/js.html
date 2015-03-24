@@ -1,0 +1,51 @@
+
+<script type="text/javascript"  src="{{ STATIC_URL }}JSmol.min.js"> </script> 
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/Base.js"></script>
+<!--<script type="text/javascript" src="{{ STATIC_URL }}js/popup.js"></script>-->
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/log4javascript_uncompressed.js"></script>
+<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/utility.js"> </script>
+<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/underscore.js"> </script>
+<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/underscore_extensions.js"> </script>
+<!--<script type="text/javascript"  src="{{ STATIC_URL }}jmol/Jmol.js"> </script>-->
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.purr.js"></script>
+ <script type="text/javascript"  src="{{ STATIC_URL }}js/lib/jquery.tabSlideOut.v1.3.js"> </script> 
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.sifr.js"></script>
+<!--<script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.flash.min.js.js"></script>-->
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.media.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.swfobject.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.purr.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/customize-jquery.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/selectbox.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.rateit.js"></script>
+<!--<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.imagetick.js"></script>-->
+<!--<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.imageradio.js"></script>-->
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.simpleImageCheck-0.4.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.curvycorners.source.js"></script>
+<!-- Modernizr -->
+<script src="{{ STATIC_URL }}js/modernizr.js"></script>
+<!-- FlexSlider -->
+	<script defer src="{{ STATIC_URL }}js/jquery.flexslider.js"></script>
+
+{% with "jquery.layout-latest.js" as file %}
+   <script type="text/javascript" src="{{ STATIC_URL }}js/{{file}}"></script>
+{% endwith %}
+
+<script>
+     Config={static_url:'{{STATIC_URL}}'};
+    $(document).ready(function(){
+    $(".text_highscore").media(function(el, options) {
+                 options.caption = false;
+                options.src = Config.static_url+"fonts/showg.swf",
+                options.flashvars.txt =  $(el).text();
+                options.bgColor='';
+                options.height='25';
+                options.width='80';
+                 options.flashvars.textColor ='#CCCCCC';
+                 options.flashvars.textAlign ='left';
+                 options.flashvars.w ='80';
+                 options.flashvars.offsetTop ='5';
+                 options.flashvars.h ='25';
+            });})
+ </script>

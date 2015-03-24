@@ -1,0 +1,212 @@
+
+html, body {
+text-align: center;
+}
+p {text-align: left;}
+a{
+  color: lightskyblue;
+}
+a:hover{
+  text-decoration: none;
+}
+@font-face {
+	font-family: showg;
+	src: url('../fonts/SHOWG.TTF');
+}
+body {
+	margin: 0;
+	padding: 0;
+	background: #000000;
+
+	text-align:left;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #F1F5F8;
+}
+
+#game-main,#game{
+  margin: 0;
+	padding: 0;
+	border:0;
+     color: #F1F5F8;
+     font-family: showg;
+}
+
+*
+{
+  margin: 0 auto 0 auto;
+ text-align:left;}
+
+
+html, body {
+text-align: center;
+border:0;
+}
+p {text-align: left;}
+
+
+.incorrect{
+  border:red 5px solid;
+}
+
+.correct{
+  border:green 5px solid;
+}
+.menu_link{
+    text-decoration: none;
+}
+.dialog{
+  z-index: 5;
+}
+.popupTitle{
+    font-weight:normal;
+    color:#FFFFFF;
+    font-size:16px;
+    font-family:lucida sans unicode, lucida grande, sans-serif;
+    text-align: left;
+}
+.control{
+    display: inline;
+}
+
+.usersText{
+    color: #FFFFFF;
+}
+.smallButton{
+    color: deepskyblue;
+    font-size: 12px;
+}
+.userMenu{
+    margin: 0 0 0 0;
+    float: right;
+    padding: 0;
+}
+#south_panel,#north_panel{
+    padding:0;
+
+    padding-bottom: 5px;
+    border-width:0;
+    margin:0;
+   min-height: 75px;
+   overflow: hidden;
+   max-height: 95px;
+}
+.config_panel{
+    position: relative;
+    height: 50%;
+    width: 100%;
+    float:right;
+    display:none;
+    overflow: hidden;
+    padding-top: 20px;
+  background-image: url( "../images/glossy-left.png");
+  background-position: left;
+
+}
+.config_hidden{
+    position: relative;
+    height: 50%;
+    width: 20%;
+    float:left;
+    overflow: hidden;
+    padding-top: 20px;
+  background-image: url( "../images/glossy-left.png");
+  background-position: left;
+
+}
+#message_box2{
+  display:inline-block;
+  height: 75px;
+  width: 500px;
+  margin-left: auto ;
+  margin-right: auto ;
+  background-image: url( "../images/glossy.png");
+  background-position: left;
+  background-repeat: repeat-x;
+  padding: 3px 10px;
+  border:1px;
+
+}
+#messages_panel{
+  text-align: center;
+
+}
+#messages_panel,#score_panel{
+    overflow:hidden;
+    border:0;
+}
+
+
+#south_west,#south_center,#south_east{
+        margin:0;
+            overflow:visible;
+    height:75px;
+    border:0;
+    padding:0;
+}
+#north_east{
+        margin:0;
+            overflow:hidden;
+    height: 75px;
+    border:0;
+    padding:0;
+}
+
+#points_panel,#controls,#user_panel{
+     background-image: url( "../images/glossy-up.png");
+  background-position: left;
+  background-repeat: repeat-x;
+   
+   padding:3px;
+}
+#controls{
+  height: 100%;
+ width: 800px;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+
+#player_points,#poker_panel,#bet_panel{
+    overflow:visible;
+}
+
+#chips_image{
+    overflow:hidden;
+    max-height: 64px;
+    border:0;
+    max-width: 64px;
+    vertical-align: top;
+    margin:0;
+    padding:0;
+}
+
+
+
+/*for corners plug-in*/
+.round {
+border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px;
+}
+
+.control_panel{
+
+}
+ ul{
+  margin:0;
+  padding:0;
+}
+.control_panel h4{
+  text-align: center;
+
+}
+.control_panel{
+  text-align: center;
+  margin-left:5px;
+  margin-right:5px;
+  padding: 0px 15px;
+  display:inline-block;
+}
+.bet_buttons{
+ width: 32px;
+ height: 32px;
+}

@@ -1,0 +1,39 @@
+
+<div class="protein_container" id="protein_container0">
+  <div id="protein0"  class="protein ">
+    <div id="select_but">
+    </div>
+    <script type="text/javascript">
+      function jmolButton(script, text) {
+        Jmol.jmolButton(jmolApplet0, script, text)
+      }
+      var Info = {
+        use: "HTML5",
+        color: "black",
+        width: "71%",
+        height: "71%",
+        j2sPath: "../static/j2s",
+        script: "set antialiasDisplay;load /static/proteins/movie.pdb; anim mode PALINDROME;anim on",
+        isSigned: false,
+        disableJ2SLoadMonitor: false,
+        disableInitialConsole: false,
+        allowjavascript: true,
+      };
+      Jmol.setAppletCss(null, "style='margin-top:45px'");
+      Jmol.setButtonCss(null, "style='width:100px'");
+      Jmol.getApplet("jmolApplet0", Info);
+      jmolButton("console");
+      Jmol.jmolCommandInput(jmolApplet0);
+//            Jmol._getElement(jmolApplet0, "appletdiv").style.border="1px solid blue"
+    </script>
+  </div>
+  <div style="display:none;" class="score_container_top votes" id="score_container0">
+    <div class="vote_container vote_container_top" id="vote_container0" >
+      <label class="vote" id="p0_points"></label>
+    </div>
+
+  </div>
+  <div class="select_button" id="select_button0">
+    <p ></p>
+  </div>
+</div>

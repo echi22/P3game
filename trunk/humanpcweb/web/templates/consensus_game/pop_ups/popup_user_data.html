@@ -1,0 +1,73 @@
+<div id="user_data" title="User Data" >
+  
+    <div id="modify_data">
+        <form name="modify" action="">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td align="right">
+                         Username:
+                    </td>
+                    <td>
+                        <input name="user_name_modify" value="{{user.username}}" size="15" id="user_name_modify" type="text"/><br/>
+                        <label class="error" for="user_name" id="username_modify_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                         Name:
+                    </td>
+                    <td>
+                      <input name="first_name" size="15" value="{{user.first_name}}" id="first_name_modify" type="text"/><br/>
+
+                        <label class="error" for="first_name" id="first_name_modify_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        Old Password:
+                    </td>
+                    <td>
+                        <input name="old_password" size="15" id="old_password" type="password"/><br/>
+
+                       <label class="error" for="old_password" id="old_password_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        New Password:
+                    </td>
+                    <td>
+                        <input name="password" size="15" id="password_modify" type="password"/><br/>
+
+                       <label class="error" for="password" id="password_modify_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                          Confirm Password:
+                    </td>
+                    <td>
+                        <input name="password2" size="15" id="password2_modify" type="password"/><br/>
+
+                        <label class="error" for="password2" size="15" id="password2_modify_error">This field is required.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                          E-mail:
+                    </td>
+                    <td>
+                        <input name="email" size="15" value="{{user.email}}" id="email_modify" type="text"/><br/>
+           <label class="error" for="email" id="email_modify_error">This field is required.</label>
+                    </td>
+                </tr>
+            </table>
+
+            <input id="save_changes" value="Save Changes" type="submit"/>
+        </form>
+    </div>
+    <div id="modify_result" style="display: none;">
+         <span id="modify_result_span"></span><br>
+    </div>
+</div>

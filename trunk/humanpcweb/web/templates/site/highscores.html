@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{%block extraJs %}
+<script>
+	$(function() {
+		$( "#play" ).button();
+	});
+	$(function() {
+		$( "#salir" ).button();
+	});
+</script>
+{% endblock %}
+{% block main %}
+
+<div id="banner"   >
+    <img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" width="250px">
+</div>
+    <div style="clear: both"></div>
+    
+    <div class="highscores_panel" >
+        <fieldset class="border_blue  " style="height: 4 0px; margin-bottom:40px;">
+           
+      <div style="text-align: center; padding: 60px;">
+      
+	<span  id="score">Puntos: {{score}}</span>
+	<table>
+	
+		{% for i in 0|make_list %}
+		<tr>
+			{% for game_score in game_scores %}
+				{% if game_score.game_instances_correct|slugify  > i|slugify %}
+					<td><div id="instance_{{forloop.counter}}_{{i}}"
+					class="circleBig correct_score"></div></td> 
+				{% else %}
+					<td><div id="instance_{{forloop.counter}}_{{i}}"
+					class="circleBig incorrect_score"></div></td>	
+				{% endif %}			
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		<tr>
+			{% for game_score in game_scores %}
+			<td class="score_numbers"><span>{{forloop.counter}}</span></td> {%endfor%}
+		</tr>
+	</table>
+	
+</div>
+                       
+                     
+        </fieldset>
+    </div>
+       
+
+    <div style="clear:both"></div>
+    <div style="text-align: center; padding-top: 5px;">
+    	<a href="/game/play" id="play" ><span class="play_again">Volver a jugar</span></a>
+    	 			 <a href="/users/logout_user" id="salir" ><span class="play_again">Salir</span></a>    
+    	
+    </div>
+    
+    
+
+    
+{% endblock %}
+
+
+
+            

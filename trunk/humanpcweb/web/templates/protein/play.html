@@ -1,0 +1,140 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% include "js.html" %}
+    {% include "css.html" %}
+
+      <script type="text/javascript">
+    Config={static_url:'{{STATIC_URL}}',
+    game_type:'{{game_data.game_type}}'};
+
+</script>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/game.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/soundmanager2.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/api.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/video.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/sound.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/applet.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/initialize.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller_survival.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller_bet.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/model.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller_user.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/view.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/handlers.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/notification.js"></script>
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/notification.css" />
+<script type="text/javascript" src="{{ STATIC_URL }}js/humanpc.js"></script>
+    <title>P3</title>
+  </head>
+  <body>
+
+        <div class="ui-layout-center " id="game-main" >
+
+            <div class="west-center" style="border:0; padding: 0; overflow: hidden;">
+               
+                {% include "protein/config_panel.html" %}
+            </div>
+            <div id="game" class="middle-center">
+                <table>
+                    {% if user.is_superuser %}
+                    <tr>
+                        <td id="info0">
+
+                        </td>
+                        <td id="info1">
+
+                        </td>
+                        <td id="info2">
+                            
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td id="protein0" class="protein circular">
+                            
+                        </td>
+                        <td id="protein1"  class="protein circular">
+
+                        </td>
+                        <td id="protein2"  class="protein circular">
+
+                        </td>
+                    </tr>
+                    {% ifequal game_data.game_type "bet" %}
+                    {% include "protein/bet_buttons.html" %}
+
+                    {% else %}
+                    {% include "protein/split_bet.html" %}
+                    {% endifequal %}
+
+                </table>
+            </div>
+
+
+
+        </div>
+
+        <div id="north_panel" class="ui-layout-north panel" >
+            {% include "protein/north_panel.html" %}
+        </div>
+
+        <div id="south_panel" class="ui-layout-south panel">
+            {% include "protein/south_panel.html" %}
+        </div>
+
+
+        <script type="text/javascript">
+            $(function () {
+                $('body').layout({ applyDefaultStyles: false,
+                    resizable:false,
+                    closeable:false,
+                    slideable: false,
+                    spacing_open: 0
+
+                });
+                $('#south_panel').layout({ applyDefaultStyles: false,
+                    resizable:false,
+                    closeable:false,
+                    slideable: false,
+                    spacing_open: 0
+
+                });
+                $('#north_panel').layout({ applyDefaultStyles: false,
+                    resizable:false,
+                    closeable:false,
+                    slideable: false,
+                    spacing_open: 0
+
+                });
+                $('#game-main').layout({ applyDefaultStyles: false,
+                    center__paneSelector:	".middle-center",
+                    west__paneSelector:		".west-center",
+                    west__size:				75,
+                    resizable:false,
+                    closeable:false,
+                    slideable: false,
+                    spacing_open: 0
+
+                });
+                Initialize.initialize0();
+            });
+        </script>
+
+        <!-- pop-ups   -->
+        {% include "protein/popup_registration.html" %}
+        {% include "protein/popup_user_data.html" %}
+        {% include "protein/loading.html" %}
+        {% include "protein/level_up.html" %}
+        {% include "protein/finish_menu.html" %}
+        {% include "protein/popup_name.html" %}
+        {% include "protein/popup_log_in.html" %}
+        {% include "protein/video.html" %}
+    </body>
+
+
+</html>

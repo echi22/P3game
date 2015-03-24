@@ -1,0 +1,8 @@
+      <h1>{{title}}:</h1>
+      <ol id="classes">
+        {% for c in levels %}
+        <li>
+          <h2> <a href="/browser/{{level}}?id={{c.id}}">{{c.id}}</a> </h2>
+        </li>
+        {% endfor %}
+      </ol>

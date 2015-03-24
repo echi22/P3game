@@ -1,0 +1,18 @@
+{% extends "researcher/base.html" %}
+
+
+
+
+            	{% block main_top %} <h1>Subir Clasificación</h1> {% endblock %}
+
+
+           	{% block main_body %}
+            
+           	
+                    <form   enctype="multipart/form-data" action="/researcher/upload_classification" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="submit" value="Upload" />
+                    </form>
+
+                {% endblock %}

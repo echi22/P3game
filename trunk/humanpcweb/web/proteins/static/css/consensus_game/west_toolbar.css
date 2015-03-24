@@ -1,0 +1,35 @@
+
+.config_panel{
+    position: relative;
+    float:right;
+    overflow: hidden;
+    padding-left: 10px;
+
+
+}
+#highscores_panel_container{
+    position: relative;
+    float:left;
+    overflow: hidden;
+    padding-top: 20px;
+    padding-left: 10px;
+
+}
+
+.gradient_background_left{
+    background-image: url( "../../images/gradient_background_left2.png");
+    background-position: left;
+    background-repeat: repeat-x;
+    padding: 10px;
+    padding-left: 20px;
+
+}
+
+#game_options ul > li{
+    display: inline-block;   /* You can also add some margins here to make it look prettier */
+    zoom:1;
+    *display:inline; /* this fix is needed for IE7- */
+    padding-top: 10px;
+    vertical-align:middle;
+    padding-left: 5px;
+}

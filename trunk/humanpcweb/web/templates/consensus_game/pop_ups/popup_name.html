@@ -1,0 +1,10 @@
+<div id="insert_name" title="Insert your name!"  style="">
+    
+    <div>
+        <form id="form_name" method="post" action="">{% csrf_token %}
+           <input style="z-index: 2000;" name="user_name" id="user_name" type="text"/>
+            <input id="submit_user_name" value="Play!" type="button"/>
+        </form>
+    </div>
+    <p>Already registered? <a href="#" id="open_log_in">Log In! </a></p>
+</div>

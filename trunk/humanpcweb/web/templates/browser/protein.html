@@ -1,0 +1,46 @@
+{% extends "browser/base.html" %}
+
+{% block north %}
+{% include  "browser/levels.html" with title="Classes" level="class" levels=classes %}
+{% include  "browser/levels.html" with title="Folds" level="fold" levels=route.Class.children %}
+{% include  "browser/levels.html" with title="Superfamilies" level="superfamily" levels=route.Fold.children %}
+
+{% include  "browser/levels.html" with title="Families" level="family" levels=route.SuperFamily.children %}
+
+{% include  "browser/search_protein.html" %}
+{% endblock %}
+
+{% block center %}
+<h2> Protein {{protein.code}} (Scop family id: {{route.Family.id}}, <a href="http://scop.mrc-lmb.cam.ac.uk/scop/search.cgi?key={{protein.code}}">Scop</a>) </h2>
+
+<img alt=" protein {{protein.code}}" style="" src="{{STATIC_URL}}proteins/images/{{protein.name}}.{{settings.PROTEIN_IMAGES_FORMAT}}" />
+
+
+<div id="protein">
+</div>
+<script type="text/javascript" >
+  
+
+  //  jmolInitialize("{{STATIC_URL}}jmol");
+  //  jmolSetParameter("UseCommandThread","true");
+  var model= "{{STATIC_URL}}proteins/{{protein.name}}";
+  var script = "load " + model + ";cpk off; wireframe off; cartoon; color cartoon structure;";
+  //  jmolApplet(400, script);
+  $(function(){
+    var id='jmolApplet0';
+    var string='<object name="'+id+'" id="'+id+'" type="application/x-java-applet" width="350" height="350" align="left">\n\
+                        <param name="codebase" value="'+Config.static_url+'jmol"> \n\
+                        <param name="java_arguments" value="-Xmx512m"> <param name="mayscript" value="true"> \n\
+                        <param name="progresscolor" value="blue"> <param name="boxbgcolor" value="black">\n\
+                        <param name="boxfgcolor" value="white"><param name="boxmessage" value="Downloading JmolApplet ...">\n\
+                        <param name="script" value="'+  script +'">\n\
+                        <param name="useCommandThread" value="TRUE"><param name="progressbar" value="true">\n\
+                        <param name="code" value="JmolApplet">  <param name="archive" value="JmolApplet0.jar">\n\
+                    </object>';
+    //            document.getElementById("protein").innerHTML= string;
+  });
+</script>
+
+
+{% endblock %}
+
