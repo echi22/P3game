@@ -1,0 +1,65 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    {% include "consensus_game/css.html" %}
+    {% include "consensus_game/js.html" %}
+       
+    <title>P3</title>
+  </head>
+  <body>
+
+        <div class="ui-layout-center " id="game-main" >
+            <div class="west-center" style="border:0; padding: 0; overflow: hidden;" >
+                
+            </div>
+            
+            <div id="game-container" class="middle-center" id="config_container_panel">
+            	<div heigth="75px">{% include "consensus_game/left_panel.html" with scores=scores%}</div>
+                {% include  "consensus_game/main/main.html" %}
+            </div>
+
+
+
+        </div>
+
+                
+        <script type="text/javascript">
+            $(function () {
+ $.sifr({
+      path: Config.static_url+"fonts/",
+      save: true
+    });
+
+	
+                $('body').layout({ applyDefaultStyles: false,
+                    resizable:false,
+                    closeable:false,
+                    slideable: false,
+                    spacing_open: 0
+
+                });
+
+                $('#game-main').layout({ applyDefaultStyles: false,
+                    center__paneSelector:	".middle-center",
+                    center__onresize: 'innerLayout.resizeAll',
+                    west__paneSelector:		".west-center",
+                    west__size:				0,
+                    resizable:true,
+                    closeable:false,
+                    slideable: false,
+                    spacing_open: 0
+
+                });
+                
+                Initialize.initialize0();
+            });
+        </script>
+        
+
+    </body>
+
+
+</html>

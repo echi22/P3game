@@ -1,0 +1,13 @@
+
+<fieldset class="border_blue  " style="height: 200px;">
+	<h2 class="titleLarge padding_bottom8 margin_bottom border_bottom">Bienvenido
+		{{user.username}}!</h2>
+	<form action="/game/play" method="post" style="display: inline;">
+		{% csrf_token %} <input type="submit" style="display: inline;"
+			value="Jugar" />
+	</form>
+	<form action="/users/logout_user" method="post"
+		style="display: inline;">
+		{% csrf_token %} o <input type="submit" src="" value="Salir" />
+	</form>
+</fieldset>

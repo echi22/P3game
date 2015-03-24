@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{%block extraJs %}
+<script>
+	$(function() {
+		$("#entrar").button();
+		$( "input:submit, a, button", ".left_column" ).button();
+		$( "input:submit, a, button", ".center_column" ).button();
+		$( "input:submit, a, button", ".right_column" ).button();
+		
+	});
+	
+	function hideText()
+	{
+				$("#more_text").hide('fast',function(){
+				$("#show_more").show();
+			});
+	}
+	$(document).ready(function() {		
+		$("#more_text").hide();
+		$("#show_more").click(function() {
+			$("#more_text").show(
+				'fast',function(){
+				$("#show_more").hide();
+
+			});
+
+		});
+
+		$("#show_less").click(function() {
+			$("#more_text").hide('fast',function(){
+				$("#show_more").show();
+			});
+
+		});
+	});
+
+</script>
+{% endblock %}
+{% block main %}
+
+<div id="banner"   >
+    <img align="left" src="{{STATIC_URL}}images/logo.png" style="margin-left: 50px; cursor: pointer" onclick="window.location.href = 'http://www.terraludus.org'" width="200px">
+
+	<a id="entrar" href="/login" style="top: 40px; right: 100px; position: absolute;">Entrar</a>
+    <img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" style="margin-left: -250px;" width="200px">
+</div>
+    <div style="clear: both"></div>
+    <div style="height:100%">
+    <section class="slider">
+		 <div class="flexslider" style="height:45%;">
+						<ul class="slides">		
+							<li style="height:45%"><iframe width="100%" height="100%" src="//www.youtube.com/embed/4VWDGr2pQSI?rel=0" frameborder="0" allowfullscreen></iframe></li>				
+							<li><img width="100%" height="100%" src="{{STATIC_URL}}images/index/2.png" /></li>
+							<li><img width="100%" height="100%" src="{{STATIC_URL}}images/index/3.png" /></li>			
+							<li><img width="100%" height="100%" src="{{STATIC_URL}}images/index/4.png" /></li>
+							<li><img width="100%" height="100%" src="{{STATIC_URL}}images/index/5.png" /></li>
+							<li><img width="100%" height="100%" src="{{STATIC_URL}}images/index/6.png" /></li>				
+						</ul>
+		</div>
+		</section>
+	</div>
+    <div style="clear:both"></div>
+    
+    <p style="text-align:left; font-size: 14px; font-family:verdana; width: 45%; margin: auto" ><b>P3</b> es un juego basado en descubrir la más diferente entre las tres <b>proteínas</b> de <b>trios</b> que el juego presenta a los jugadores. Antes de seleccionarlas se pueden <b>rotar</b> para ver bien las similitudes y diferencias. Al <b>seleccionar</b>, se recibe un punto si la selección coincide con una clasificación de proteínas hecha por expertos. Cada juego son 10 tríos. Cuando se logra hacer 8 puntos o más en un juego, se sube de nivel.<br> <span class="descriptionText clickable" style="color: #589c9c;
+text-decoration: none;
+cursor: pointer;" id="show_more">[+]Ver m&aacute;s...</span><br/><br/>
+</p><p style="text-align:left; font-size: 14px; font-family:verdana; width: 45%; margin: auto" id="more_text">
+Cómo clasificar proteínas es un problema de gran interés científico y médico, ya que da información sobre la función de proteínas de función desconocida, ayuda a desarrollar remedios, etc. Jugando P3 se ayuda a resolver este problema, ya que se puede hacer una clasificación analizando las selecciones hechas por los jugadores.<br/> <br/>
+
+P3 fue diseñado y desarrollado por Julian Echave, Ezequiel Colautti y Facundo Quiroga. 
+<br/><br/>
+ Agradecemos a Edvin Fugglebak y Nathalie Reuter de la Universidad de Bergen por discusiones de las que surgió la idea de este proyecto.
+<br/><br/><i>P3 es un juego del laboratorio de juegos experimentales Terra Ludus auspiciado por el Programa Lectura Mundi de la Universidad Nacional de San Martín.</i>
+<br><span class="descriptionText clickable" onclick="hideText()" id="show_less" style="color: #589c9c;
+text-decoration: none;
+cursor: pointer;">[-]Ver menos</span>
+</p>
+
+<script type="text/javascript">
+		$(window).load(function() {
+			$('.flexslider').flexslider({
+				animation : "slide",
+				slideshowSpeed:5000,
+				slideshow:false,
+				start : function(slider) {
+					$('body').removeClass('loading');
+				}
+			});
+		});
+	</script>
+    
+{% endblock %}
+
+
+
+            

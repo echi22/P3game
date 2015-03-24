@@ -1,0 +1,38 @@
+<div id="score_panel"class="ui-layout-west panel">
+
+  <p>Score:<span id="score"></span>
+    /<span id="attempts"></span>
+  </p>
+
+  <p >Efficacy: <span id="efficacy"></span>% 
+  </p>
+
+  <p >Total score:<span id="total_score"></span>
+    /<span id="total_attempts"></span>
+  </p>
+  <p >Proteins compared: <span id="proteins_compared"> </span>
+  </p>
+
+
+  <div  id="rateit" class="rateit" data-rateit-value="4">
+    <input type="hidden" id="backing">
+  </div>
+  
+</div>
+
+<div id="messages_panel" class="ui-layout-center panel round" style="" >
+  <div id="message_box2" class="round"  >
+
+
+  </div>
+
+</div>
+
+
+<div id="north_east" class="ui-layout-east panel userMenu " >
+  <div id="level_panel" class="round" >
+    {% include "protein/level.html" with game_settings=game_data.game_settings %}
+  </div>
+
+
+</div>

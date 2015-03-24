@@ -1,0 +1,31 @@
+.control_panel h4{
+  text-align: center;
+
+}
+
+.control_panel{
+  text-align: center;
+  margin-left:5px;
+  margin-right:5px;
+  padding: 0px 15px;
+/*  display:inline-block;*/
+}
+
+#controls{
+    text-align: center;
+  
+  height: 100%;
+ width: 130px;
+ padding-top:20px;
+  margin-left: auto ;
+  margin-right: auto ;
+   background-image: url( "../../images/gradient_background.png");
+  background-position: top;
+  background-repeat: repeat-y;
+}
+.control{
+/*    display: inline;*/
+list-style: none;
+  text-align: center;
+
+}

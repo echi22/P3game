@@ -1,0 +1,22 @@
+{% extends "browser/base.html" %}
+
+{% block north %}
+      {% include  "browser/levels.html" with title="Classes" level="class" levels=classes %}
+      {% include  "browser/levels.html" with title="Folds" level="fold" levels=route.Class.children %}
+      {% include  "browser/levels.html" with title="Superfamilies" level="superfamily" levels=route.Fold.children %}
+      {% include  "browser/levels.html" with title="Families" level="family" levels=level.children %}
+      {% include  "browser/search_protein.html" %}
+{% endblock %}
+
+{% block center %}
+        {% for c in level.children %}
+
+        <div class="class">
+          <h2> <a href="/browser/family?id={{c.id}}">Family {{c.id}}</a> </h2>
+          {% include  "browser/proteins.html" with proteins=c.images %}
+
+        </div>
+        {% endfor %}
+
+{% endblock %}
+

@@ -1,0 +1,12 @@
+<ul>
+
+  
+  {% if  user.is_authenticated %}
+     <li><a href="/game/play">Play!</a></li>
+    <li><a href="/users/logout_user">Log out <span id="user"></span></a></li>
+  {% else %}
+    <li><a href="/users/login_or_register">Play!</a></li>
+    <li><a href="/users/create_user">New User</a></li>
+    <li><a href="/users/login_user">Log in<span id="user"></span></a></li>
+  {% endif %}
+</ul>

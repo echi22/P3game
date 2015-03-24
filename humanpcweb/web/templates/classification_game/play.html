@@ -1,0 +1,112 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% include "classification_game/js.html" %}
+    {% include "classification_game/css.html" %}
+
+
+      <script type="text/javascript">
+    Config={static_url:'{{STATIC_URL}}',
+    game_type:'{{game_data.game_type}}',
+    protein_images_format:'{{settings.PROTEIN_IMAGES_FORMAT}}'};
+
+</script>
+    
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/classification_game.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/classification_game/api.js"></script>
+    <!--
+    <script type="text/javascript" src="{{ STATIC_URL }}js/soundmanager2.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/video.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/sound.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/applet.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/initialize.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller_survival.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller_bet.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/model.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/controller_user.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/view.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/game/handlers.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/notification.js"></script>
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/notification.css" />
+<script type="text/javascript" src="{{ STATIC_URL }}js/humanpc.js"></script>-->
+    <title>P3</title>
+  </head>
+  <body>
+
+    <div class="ui-layout-center " id="game-main" >
+      <div id="game" class="middle-center">
+
+
+      </div>
+
+
+
+    </div>
+
+    <div id="north_panel" class="ui-layout-north panel" >
+
+    </div>
+
+    <div id="south_panel" class="ui-layout-south panel">
+
+    </div>
+
+
+    <script type="text/javascript">
+      $(function () {
+        $('body').layout({ applyDefaultStyles: false,
+          resizable:false,
+          closeable:false,
+          slideable: false,
+          spacing_open: 0
+
+        });
+        //                $('#south_panel').layout({ applyDefaultStyles: false,
+        //                    resizable:false,
+        //                    closeable:false,
+        //                    slideable: false,
+        //                    spacing_open: 0
+        //
+        //                });
+        //                $('#north_panel').layout({ applyDefaultStyles: false,
+        //                    resizable:false,
+        //                    closeable:false,
+        //                    slideable: false,
+        //                    spacing_open: 0
+        //
+        //                });
+        //                $('#game-main').layout({ applyDefaultStyles: false,
+        //                    center__paneSelector:	".middle-center",
+        //                    west__paneSelector:		".west-center",
+        //                    west__size:				75,
+        //                    resizable:false,
+        //                    closeable:false,
+        //                    slideable: false,
+        //                    spacing_open: 0
+        //
+        //                });
+        Api.get_game_instance(20,function (proteins){
+          Log.debug( " generating images ");
+          for(var i=0;i<proteins.length ;i++){
+            var protein=proteins[i];
+            var img=$('<img class="protein" id="'+ protein.id+'" src= "'+ Config.static_url+'proteins/images/'+ protein.code+'.png" width= "150px" height= "150px" />');
+            img.draggable({ containment: 'parent',stack: ".protein"});
+//            img.draggable( "option", "grid", [156, 156] );
+            $( "#game").append (img);
+          }
+        
+Log.debug( " finished ");
+        });
+
+
+      });
+    </script>
+
+  </body>
+
+
+</html>

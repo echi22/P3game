@@ -1,0 +1,15 @@
+
+<div class="images">
+            <h3>{{title|default:"Sample proteins:"}}</h3>
+            {% for protein in proteins %}
+            <div class="image">
+              <div>
+                <p><a href="/browser/protein?id={{protein.code}}">{{code}}</a></p>
+                <p><a href="http://scop.mrc-lmb.cam.ac.uk/scop/search.cgi?key={{protein.code}}">Scop</a></p>
+              </div>
+              <a href="/browser/protein?id={{protein.code}}">
+                <img alt=" protein {{protein.code}}" style="" src="{{STATIC_URL}}proteins/images/{{protein.name}}.{{settings.PROTEIN_IMAGES_FORMAT}}" />
+              </a>
+            </div>
+            {% endfor %}
+          </div>

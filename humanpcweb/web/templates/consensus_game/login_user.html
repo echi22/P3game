@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+
+
+
+            	{% block main_top %} <h1>Log in</h1> {% endblock %}
+
+
+           	{% block main_body %}
+                {% if attempted %}
+                {% if error %}
+                <p>Sorry, unrecognized username or password.</p>
+                {% else %}
+                <p>Welcome {{username}}!</p>
+                {%endif%}
+                {% else %}
+
+                    <form  action="/users/login_user" method="post">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <td>
+                                    Username:
+                                </td>
+                                <td>
+                                    <input type="text" name="username" size="40" maxlength="20">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Password:
+                                </td>
+                                <td>
+                                    <input type="password" name="password" size="40" maxlength="20">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Sign in" />
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td>{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}</td>
+                            </tr>
+                        </table>
+
+
+                    </form>
+                {%endif%}
+                {% endblock %}

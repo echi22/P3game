@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="height:100%">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link type="text/css" href="{{ STATIC_URL }}css/dark-hive/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+<link type="text/css" href="{{ STATIC_URL }}css/layout-default-latest.css" rel="Stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/flexslider.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style2.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
+
+{% include "js.html" %}
+{%block extraJs %}  {% endblock %}
+<title>P3</title>
+</head>
+
+<body style="height:45%">
+        <div id="main">
+        {% block main %}
+        {% endblock %}
+        	
+        </div>
+</body>
+</html>

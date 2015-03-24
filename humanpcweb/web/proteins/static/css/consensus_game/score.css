@@ -1,0 +1,47 @@
+#score_panel{
+   padding: 10px 10px;
+   float: left;
+position:relative;
+ 
+background-color: transparent;
+vertical-align: middle;
+color:white;
+border: 1px solid gray;
+border-radius:10px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+
+}
+
+#game_instances_played_container{
+	display: inline;
+	width:100%;
+    margin: 0px auto;
+    text-align: center;
+}
+#game_instances_correct_container{
+	width:100%;
+    margin: 0px auto;
+    text-align: center;
+}
+#game_instances_correct_container p,#game_instances_played_container p{
+	width:100%;
+	text-align: center;
+}
+
+#game_instances_correct,#position,#game_instances_played,#game_instances_for_level{
+    display: inline;
+    padding: 0 0 0 20px;
+    margin: 0px auto;
+    font-size: 48px;
+    font-weight: lighter;
+}
+.score_image{
+	display:inline; width:48px; height:48px;
+}
+#game_instances_correct{
+    color: green;
+}
+#game_instances_played,#game_instances_for_level{
+    color: yellow;
+}

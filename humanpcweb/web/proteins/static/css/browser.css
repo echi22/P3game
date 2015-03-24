@@ -1,0 +1,64 @@
+
+html, body {
+text-align: center;
+}
+p {text-align: left;}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #000000;
+
+	text-align:left;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #F1F5F8;
+}
+
+a{
+  color: lightskyblue;
+}
+a:hover{
+  text-decoration: none;
+}
+.images a {
+  text-decoration: none;
+}
+a img{
+  border-style: none;
+}
+
+
+.image div{
+  text-align: center;
+}
+.image img{
+   display:inline;
+   height: 128px;
+   width: 128px;
+}
+.image{
+  float:left;
+}
+
+
+#classes li,#classes h2{
+  display: inline;
+
+}
+#classes{
+  display: inline;
+}
+.class{
+  clear: both;
+}
+
+#south_panel,#north_panel{
+    padding:0;
+
+    padding-bottom: 5px;
+    border-width:0;
+    margin:0;
+   min-height: 75px;
+}
+

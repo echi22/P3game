@@ -1,0 +1,45 @@
+ <div class="gradient_background_left" id="config_panel_left" style="height:75px; width: 70%; margin: auto" >
+
+    <img align="left" src="{{STATIC_URL}}images/backgrounds/p3.png" width="100px">
+<div class="config_panel" id="config_panel">
+    
+    <div id="game_options">
+        <ul style="list-style: none;">
+               
+        <li>
+        	<span class="username" id="username"></span>
+        </li>  
+        <li>
+            <div  id="fullscreen_panel">
+                <input type="image" src="{{STATIC_URL}}images/buttons/ranking.png" style="width:35px; height: 35px" onclick="window.location.href='show_highscore_table'">
+            </div>
+        </li>
+        <li>
+            <div  id="fullscreen_panel">
+                <input type="image" src="{{STATIC_URL}}images/buttons/fullscreen.png" style="width:35px; height: 35px" onclick="change_image_fullscreen(this.src)" id="fullscreen">
+            </div>
+        </li>
+        <li>
+            <div  id="sound">
+
+                <input id="mute" type="image" style="width:35px; height: 35px" src="{{STATIC_URL}}images/buttons/sound.png" >
+            </div>
+        </li>
+        <li>
+            <div  id="sound">
+
+                <a href="/users/logout_user">  <input id="mute" type="image" style="width: 35px; height: 35px;" src="{{STATIC_URL}}images/buttons/logout.png" ></a>
+            </div>
+        </li>
+    </ul>
+
+    </div>
+    
+</div>
+<!-- <div id="highscores_panel_container"> -->
+<!--             <h2> -->
+<!--                 Level <span id="highscores_panel_level"> </span> -->
+<!--             </h2> -->
+
+<!-- </div> -->
+</div>

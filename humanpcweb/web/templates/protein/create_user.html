@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+
+
+
+            	{% block main_top %} <h1>New User</h1> {% endblock %}
+
+
+           	{% block main_body %}
+                {% if saved %}
+                {% if error %}
+                <p>Passwords do not match!</p>
+                {% else %}
+                <p>The user has been created successfully</p>
+                {%endif%}
+                {% else %}
+
+                    <form  action="/users/create_user" method="post">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <td>
+                                    Username:
+                                </td>
+                                <td>
+                                    <input type="text" name="username" size="40" maxlength="20">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Name:
+                                </td>
+                                <td>
+                                    <input type="text" name="first_name" size="40" maxlength="20">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Password:
+                                </td>
+                                <td>
+                                    <input type="password" name="password" size="40" maxlength="20">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Confirm Password:
+                                </td>
+                                <td>
+                                    <input type="password" name="password2" size="40" maxlength="20">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Mail:
+                                </td>
+                                <td>
+                                    <input type="text" name="email" size="40" maxlength="20">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Crear" />
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </form>
+                {%endif%}
+                {% endblock %}
