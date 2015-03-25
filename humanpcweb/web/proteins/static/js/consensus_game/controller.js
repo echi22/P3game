@@ -75,7 +75,8 @@ function update_game_settings() {
 }
 
 function load_protein_script(p){
-    var default_representation="set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure;  select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; model 0;set antialiasDisplay true; ;save STATE state_1;set disablePopupMenu true;";
+//    p.name = "movie.pdb";
+    var default_representation="set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure;  select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; model 0;set antialiasDisplay true; ;save STATE state_1;set disablePopupMenu true;anim mode PALINDROME;anim on";
     return " load '"+Config.static_url+"proteins/"+p.name+"';;  "+default_representation
 }
 function load_proteins_scripts(proteins){
