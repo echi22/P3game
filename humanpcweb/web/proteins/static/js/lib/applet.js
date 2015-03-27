@@ -1,117 +1,3 @@
-AppletLoadedDetector = {
-  ids: [],
-  callback: function () {
-  },
-  error_callback: function () {
-  },
-  executed_callback: false,
-  set_ids: function (ids) {
-    AppletLoadedDetector.ids = ids;
-    AppletLoadedDetectorByJmolScript.applets_to_load = this.ids.length;
-  },
-  all_loaded: function () {
-    return AppletLoadedDetectorByJmolScript.initialized && AppletLoadedDetectorByFunction.all_loaded(this.ids);
-  },
-  start_detection_by_function: function () {
-    Log.info(" check detection");
-    if (AppletLoadedDetector.all_loaded()) {
-      Log.debug(" start detection by function/all loaded");
-      AppletLoadedDetector.callback();
-    } else {
-      Log.debug(" start detection by function/not all loaded");
-      AppletLoadedDetectorByFunction.wait_for_applets_to_load(AppletLoadedDetector.ids, 5, 2000,
-              AppletLoadedDetector.check_both_loaded, AppletLoadedDetector.error_callback
-              );
-    }
-
-  },
-  start_detection_by_jmol_script: function () {
-
-    AppletLoadedDetectorByJmolScript.set_callback(this.check_both_loaded);
-
-  },
-  check_both_loaded: function () {
-    if ((AppletLoadedDetector.all_loaded()) && (!AppletLoadedDetector.executed_callback)) {
-      AppletLoadedDetector.executed_callback = true;
-      AppletLoadedDetector.callback();
-    }
-  }
-
-
-};
-
-AppletLoadedDetectorByJmolScript = {
-  applets_to_load: 0,
-  applets_loaded: 0,
-  callback: function () {
-  },
-  initialized: false,
-  set_callback: function (callback) {
-    this.callback = callback;
-  },
-  notice: function (applet_index) {
-    AppletLoadedDetectorByJmolScript.applets_loaded++;
-    Log.info("Applet " + applet_index + " has loaded (by jmol). (initialized: " + this.initialized + ", applets_loaded: " + AppletLoadedDetectorByJmolScript.applets_loaded + " )");
-    if (this.applets_loaded === this.applets_to_load && !this.initialized) {
-
-      Log.info("applets loaded (by jmol)");
-      this.initialized = true;
-      this.callback();
-    }
-    Log.info(this.applets_to_load);
-  }
-
-
-};
-
-
-AppletLoadedDetectorByFunction = {
-  initialized: false,
-  wait_for_applets_to_load: function (ids, attempts, delay, onSuccessCallback, onFailCallback) {
-    Log.info(" check applets loaded by function (attempts left: " + attempts + " ) ");
-    if (attempts === 0) {
-      onFailCallback();
-    } else {
-      if (AppletLoadedDetectorByFunction.all_loaded(ids)) {
-        Log.info("applets loaded (by function)");
-        AppletLoadedDetectorByFunction.initialized = true;
-        //        Log.info( "calling success callback ");
-        onSuccessCallback();
-        //        Log.info( " end calling success callback ");
-      } else {
-        attempts--;
-        setTimeout(function () {
-          AppletLoadedDetectorByFunction.wait_for_applets_to_load(ids, attempts, delay, onSuccessCallback, onFailCallback);
-        }, delay);
-      }
-
-    }
-  },
-  all_loaded: function (ids) {
-    var all_loaded = true;
-    for (var i = 0; i < ids.length; i++) {
-      if (!AppletLoadedDetectorByFunction.applet_loaded(ids[i])) {
-        all_loaded = false;
-        break;
-      }
-    }
-    return all_loaded;
-  },
-  applet_loaded: function (id) {
-    //Test
-//    var applet = document.getElementById(id);
-//    var to = (applet) ? typeof (applet.script) : "";
-//    Log.debug(  "(check applet loaded by function) id: "+id+ " element "+applet+ " type of applet.script: "+to);
-//    return to == "function" || to == "unknown";
-    var applet = document.getElementById(id+"_canvas2d");
-    var to = (applet) ? applet.getAttribute("ready") : "";
-//    return to == "true" || to == "unknown";
-    return false;
-  }
-
-};
-
-
 AppletCreator = Base.extend({
   constructor: function () {
     this.codebase = Config.static_url + 'jmol';
@@ -145,22 +31,26 @@ AppletCreator = Base.extend({
     Log.debug(" creating applet, about to modify dom ...");
     document.getElementById(element_id).innerHTML = document.getElementById(element_id).innerHTML + string;
   },
-  create: function (applet_id, element_id, script) {
+  create: function (applet_id, element_id) {
     function readyfc() {
 //      AppletLoadedDetectorByJmolScript.notice(applet_id);
       console.log("cargado " + applet_id);
-      $("#"+applet_id+"_canvas2d").attr("ready","true");
+      $("#" + applet_id + "_canvas2d").attr("ready", "true");
     }
 //    var script = "set antialiasDisplay;load /static/proteins/movie.pdb; anim mode PALINDROME;anim on";
     Jmol.setXHTML(element_id);
     Jmol.setDocument(document.getElementById(element_id));
     var Info = {
+      progresscolor: "blue",
+      boxbgcolor: "black",
+      boxfgcolor: "white",
+      progressbar: "true",
       use: "HTML5",
       color: "black",
-      width: "71%",
-      height: "71%",
+      width: "220",
+      height: "220",
       j2sPath: "../static/j2s",
-      script: script,
+      //script: script,
       isSigned: false,
       disableJ2SLoadMonitor: true,
       disableInitialConsole: true,
@@ -182,20 +72,20 @@ AppletScriptExecutor = Base.extend({
       Log.error(" could not execute script: " + script + " for this " + ids + ".");
       error_callback();
     } else {
-      if (AppletLoadedDetectorByFunction.all_loaded(ids)) {
-        this.apply_to_jmol_windows(ids, script);
-        Log.debug("script  " + script + "executed for this " + ids + ".");
+//      if (AppletLoadedDetectorByFunction.all_loaded(ids)) {
+      this.apply_to_jmol_windows(ids, script);
+      Log.debug("script  " + script + "executed for this " + ids + ".");
 
-        //        Log.info( "calling success callback ");
+      //        Log.info( "calling success callback ");
 
-        callback();
-        //        Log.info( " end calling success callback ");
-      } else {
-        attempts--;
-        setTimeout(function () {
-          this.execute_script_do(ids, script, callback, error_callback, attempts, delay);
-        }, delay);
-      }
+      callback();
+      //        Log.info( " end calling success callback ");
+//      } else {
+//        attempts--;
+//        setTimeout(function () {
+//          this.execute_script_do(ids, script, callback, error_callback, attempts, delay);
+//        }, delay);
+//      }
 
     }
   },
@@ -204,20 +94,20 @@ AppletScriptExecutor = Base.extend({
       Log.error(" could not execute scripts: " + scripts + " for this " + ids + ".");
       error_callback();
     } else {
-      if (AppletLoadedDetectorByFunction.all_loaded(ids)) {
-        this.apply_scripts_to_jmol_windows(ids, scripts);
-        Log.debug("scripts " + scripts + " executed for this " + ids + ".");
+//      if (AppletLoadedDetectorByFunction.all_loaded(ids)) {
+      this.apply_scripts_to_jmol_windows(ids, scripts);
+      Log.debug("scripts " + scripts + " executed for this " + ids + ".");
 
-        //        Log.info( "calling success callback ");
-        callback();
-        //        Log.info( " end calling success callback ");
-      } else {
-        //        Log.debug( "attempts  "+ attempts +" remaining to execute scripts: "+ scripts + " for this "+ids +".");
-        attempts--;
-        setTimeout(function () {
-          this.execute_scripts_do(ids, scripts, callback, error_callback, attempts, delay);
-        }, delay);
-      }
+      //        Log.info( "calling success callback ");
+      callback();
+      //        Log.info( " end calling success callback ");
+//      } else {
+//        //        Log.debug( "attempts  "+ attempts +" remaining to execute scripts: "+ scripts + " for this "+ids +".");
+//        attempts--;
+//        setTimeout(function () {
+//          this.execute_scripts_do(ids, scripts, callback, error_callback, attempts, delay);
+//        }, delay);
+//      }
 
     }
   },
@@ -237,7 +127,7 @@ AppletScriptExecutor = Base.extend({
     var showing = App.view.game_panel.showing_proteins;
     App.view.game_panel.show_proteins();
     for (var i = 0; i < ids.length; i++) {
-      jmolScript(scripts[i], i);
+      Jmol.script(eval("jmolApplet" + i), scripts[i]);
     }
     if (!showing) {
       App.view.game_panel.hide_proteins();
@@ -284,7 +174,7 @@ AppletManager = Base.extend({
   },
   create_applet: function (applet_id, element_id) {
 //    Log.debug( " creating applet... "+ element_id);
-    this.applet_creator.create(applet_id, element_id, "javascript AppletLoadedDetectorByJmolScript.notice(" + applet_id + ");");
+    this.applet_creator.create(applet_id, element_id);
   },
   create_applets: function (element_ids) {
 
@@ -293,9 +183,7 @@ AppletManager = Base.extend({
     });
 
     Log.debug("about to create applet with ids: " + this.ids);
-    AppletLoadedDetector.set_ids(this.ids);
     Log.info(" registering for applet loading by jmol script");
-    AppletLoadedDetector.start_detection_by_jmol_script();
     _.each(range(element_ids.length), function (i) {
       //    Log.debug(_.printMethods( this ));
       this.create_applet(this.ids[i], element_ids[i]);
