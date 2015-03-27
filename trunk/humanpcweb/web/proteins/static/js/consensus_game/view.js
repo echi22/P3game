@@ -84,13 +84,20 @@ GamePanel = Panel.extend({
   },
   update_proteins: function () {
     game_instance = App.game_instances_manager.get_game_instance();
-    game_instance.proteins = _.shuffle(game_instance.proteins);
-    var scripts = load_proteins_scripts(game_instance.proteins);
+//    game_instance.proteins = _.shuffle(game_instance.proteins);
+//      var scripts = load_proteins_scripts(game_instance.proteins);
+    var scripts;
+    if (App.flags.first) {
+      App.flags.first = false;
+      scripts = load_all_proteins_scripts(App.game_instances_manager.game_instances);
+    } else {
+      scripts = load_next_level_scripts();
+    }
     var self = this;
-    Jmol.script(jmolApplet0, scripts[0]);
-    Jmol.script(jmolApplet1, scripts[1]);
-    Jmol.script(jmolApplet2, scripts[2]);
-//    console.log("holiii");
+//    Jmol.script(jmolApplet0, scripts[0]);
+//    Jmol.script(jmolApplet1, scripts[1]);
+//    Jmol.script(jmolApplet2, scripts[2]);
+    console.log("holiii22");
     Applets.execute_scripts_all(scripts, function () {
       self.switch_spin();
       //update_representation_color();
@@ -110,7 +117,7 @@ GamePanel = Panel.extend({
   },
   switch_spin: function () {
     var spinCommand = ($("#spin").is(':checked')) ? "spin on" : "spin off";
-    App.applets.execute_script_all(spinCommand);
+//    App.applets.execute_script_all(spinCommand);
     App.game_settings.spin = $("#spin").is(':checked');
   },
   select_feedback: function () {
@@ -128,7 +135,8 @@ GamePanel = Panel.extend({
     $(".selectButton").hide();
   },
   loading_message: function () {
-    App.applets.executor.apply_to_jmol_windows([0, 1, 2], "hide all; set frank off; set echo middle center; font echo 19 sans; color echo [xAAAAAA]; echo Cargando proteina...; refresh;");
+    if (App.flags.first)
+      App.applets.executor.apply_to_jmol_windows([0, 1, 2], "hide all; set frank off; set echo middle center; font echo 19 sans; color echo [xAAAAAA]; echo Cargando proteina...; refresh;");
   }
 });
 
