@@ -44,9 +44,14 @@ MessagePanel = Panel.extend({
 GamePanel = Panel.extend({
   constructor: function (application) {
     this.showing_proteins = true;
+    this.loading_percentage = 0;
+    application.register_observer(new Observer(this.loading_level, this), "initialized");
+    application.register_observer(new Observer(this.update_loading, this), "protein_loaded");
     application.register_observer(new Observer(this.loading_message, this), "game_instance_change");
     application.register_observer(new Observer(this.update_game_instance, this), "game_instance_change");
     application.register_observer(new Observer(this.select_feedback, this), "select_protein");
+
+
     function make_mouse_enter_function(i) {
       return function () {
         $("#protein" + i).addClass("protein_selected");
@@ -61,6 +66,23 @@ GamePanel = Panel.extend({
       var buttonId = 'select_button' + i;
       $("#" + buttonId).hover(make_mouse_enter_function(i), make_mouse_leave_function(i));
 
+    }
+  },
+  loading_level: function () {
+    $("#loading_percentage").html(0+"%");
+    $("#progressbar").progressbar({
+      value: 0
+    });
+  },
+  update_loading: function () {
+    this.loading_percentage++;
+    var p = Math.floor((this.loading_percentage * 100) / (App.game_instances_manager.game_instances.length * 3));
+    $("#loading_percentage").html(p+"%");
+    $("#progressbar").progressbar({
+      value: p
+    });
+    if(p >=100){
+      $("#loading_level").hide();
     }
   },
   hide_proteins: function () {
@@ -87,17 +109,14 @@ GamePanel = Panel.extend({
 //    game_instance.proteins = _.shuffle(game_instance.proteins);
 //      var scripts = load_proteins_scripts(game_instance.proteins);
     var scripts;
-    if (App.flags.first) {
-      App.flags.first = false;
-      scripts = load_all_proteins_scripts(App.game_instances_manager.game_instances);
-    } else {
-      scripts = load_next_level_scripts();
-    }
+//    if (App.flags.first) {
+//      App.flags.first = false;
+//      scripts = load_all_proteins_scripts(App.game_instances_manager.game_instances);
+//    } else {
+//      scripts = load_next_level_scripts(App.game_instances_manager.game_instances);
+//    }
+    scripts = Applets.load_scripts(game_instance);
     var self = this;
-//    Jmol.script(jmolApplet0, scripts[0]);
-//    Jmol.script(jmolApplet1, scripts[1]);
-//    Jmol.script(jmolApplet2, scripts[2]);
-    console.log("holiii22");
     Applets.execute_scripts_all(scripts, function () {
       self.switch_spin();
       //update_representation_color();

@@ -190,8 +190,15 @@ AppletManager = Base.extend({
 //      Log.debug( " applet "+i+ " created. ");
     }, this);
     Log.info("Applets created");
+  },
+  load_scripts: function () {
+    if (App.flags.first) {
+      App.flags.first = false;
+      return load_all_proteins_scripts(App.game_instances_manager.game_instances);
+    } else {
+      return load_next_level_scripts(App.game_instances_manager.game_instances);
+    }
   }
-
 });
 
 Applets = new AppletManager(10, 500);

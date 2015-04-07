@@ -43,8 +43,19 @@ def minutes_since_last_time_played(request):
     return diff
   except Exception:     
     return 0
+
+class ChooseTypeForm(forms.Form):
+  game_type = forms.CharField(max_length=100)
 def consensus_game(request):
   #Comparison.objects.all().delete()  
+  form = ChooseTypeForm(request.POST)
+  if form.is_valid():
+    game_type = form.cleaned_data["game_type"]
+    if game_type != "applet":
+      game_type = "applet_imgs"
+  else:
+    game_type = "applet"
+  print game_type
   if request.user.is_anonymous():
     return HttpResponseRedirect('/users/login_or_register')
   if(Protein.objects.count() < 3):
@@ -53,7 +64,7 @@ def consensus_game(request):
   if(minutes_since_last_time_played(request) > 120):
     profile = request.user.get_profile()
     profile.new_game()
-  c = {"comparisons_needed": 5000000, "comparisons_made": Comparison.objects.count()}
+  c = {"comparisons_needed": 5000000, "comparisons_made": Comparison.objects.count(), "game_type":game_type}
   c.update(csrf(request))
   return render_to_response('consensus_game/play.html', c, context_instance=RequestContext(request))
   
