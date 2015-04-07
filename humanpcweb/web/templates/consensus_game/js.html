@@ -1,17 +1,17 @@
-  <script type="text/javascript">
-    Config={static_url:'{{STATIC_URL}}',
-    		score_for_level_up:'{{score_for_level_up}}'
-    		};
-    </script>
+<script type="text/javascript">
+  Config = {static_url: '{{STATIC_URL}}',
+    score_for_level_up: '{{score_for_level_up}}'
+  };
+</script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/lib/Base.js"></script>
 <!--<script type="text/javascript" src="{{ STATIC_URL }}js/popup.js"></script>-->
 <script type="text/javascript" src="{{ STATIC_URL }}js/lib/log4javascript_uncompressed.js"></script>
-<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/utility.js"> </script>
-<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/underscore.js"> </script>
-<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/underscore_extensions.js"> </script>
+<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/utility.js"></script>
+<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/underscore.js"></script>
+<script type="text/javascript"  src="{{ STATIC_URL }}js/lib/underscore_extensions.js"></script>
 <!--<script type="text/javascript"  src="{{ STATIC_URL }}jmol/Jmol.js"> </script>-->
 <!--<script type="text/javascript"  src="{{ STATIC_URL }}js/JSmol.full.js"> </script>--> 
-<script type="text/javascript"  src="{{ STATIC_URL }}js/JSmol.min.js"> </script> 
+<script type="text/javascript"  src="{{ STATIC_URL }}js/JSmol.min.js"></script> 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
 <script type="text/javascript"  src="{{ STATIC_URL }}js/JSmol.full.nojq.js"> </script> -->
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.4.min.js"></script>
@@ -31,22 +31,22 @@
 <!-- <script type="text/javascript"  src="{{ STATIC_URL }}js/lib/jquery.tabSlideOut.v1.3.js"> </script> -->
 
 {% with "jquery.layout-latest.js" as file %}
-   <script type="text/javascript" src="{{ STATIC_URL }}js/{{file}}"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/{{file}}"></script>
 {% endwith %}
 
-    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/noty/js/packaged/jquery.noty.packaged.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/soundmanager2.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/api.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/video.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/sound.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/mvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/applet.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/initialize.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/controller.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/model.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/controller_user.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/noty/js/packaged/jquery.noty.packaged.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/soundmanager2.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/api.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/video.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/sound.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/mvc.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/{{game_type}}.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/initialize.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/model.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/controller_user.js"></script>
 
-    <script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/view.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/handlers.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/notification.js"></script>
- <script type="text/javascript" src="{{ STATIC_URL }}js/humanpc.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/view.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/consensus_game/handlers.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/notification.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/humanpc.js"></script>

@@ -51,6 +51,7 @@ GameSettings = Base.extend({
     this.levels_per_game = levels_per_game;
     this.game_instances_per_level = game_instances_per_level;
     this.proteins = 3;
+    this.game_type = 'jmol';
     this.game_instances_correct_to_level_up = game_instances_correct_to_level_up;
   }
 });
@@ -83,7 +84,7 @@ GameInstancesManager = Base.extend({
     this.old_game_instances = [];
   },
   get_proteins_order: function () {
-    game_instace = this.game_instances[0];
+//    game_instance = this.game_instances[0];
     var result = "";
     for (var i = 0; i < game_instance.original_order.length; i++) {
       result += "p" + (game_instance.proteins.indexOf(game_instance.original_order[i]) + 1) + "-"
@@ -101,6 +102,7 @@ Player = Base.extend({
 Application = Base.extend({
   constructor: function (game_score, game_settings, user, view) {
     this.flags = {level_up: false, finished_game: false, first: true};
+    this.model;
     this.game_score = game_score;
     this.game_settings = game_settings;
     this.game_instances_manager = new GameInstancesManager();
@@ -113,6 +115,7 @@ Application = Base.extend({
 
   },
   initialize: function () {
+    this.model = 0;
     Api.get_game_instances(function (
             game_instances) {
       App.game_instances_manager.add_game_instances(game_instances);
