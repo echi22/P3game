@@ -129,20 +129,20 @@ function alerta(){
 };
 function load_all_proteins_script(game_instances) {
   var limit = game_instances.length < 3 ? game_instances.length : 3;
-  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true;;anim mode PALINDROME;anim on ";
+  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true; ";
   var game_instance = game_instances[0];
   game_instance.proteins = _.shuffle(game_instance.proteins);
   var scripts = ["", "", ""];
   for (var h = 0; h < 3; h++) {
-    scripts[h] = "set LoadStructCallback \"alerta\" ;; load '" + Config.static_url + "proteins/mode_7.pdb';;";//+default_representation;
+    scripts[h] = "set LoadStructCallback \"alerta\" ;; load '" + Config.static_url + "proteins/" + game_instance.proteins[h].name + "';;";//+default_representation;
   }
-//  for (var i = 1; i < game_instances.length; i++) {
-//    game_instance = game_instances[i];
-//    game_instance.proteins = _.shuffle(game_instance.proteins);
-//    for (var j = 0; j < 3; j++) {
-//      scripts[j] += "set LoadStructCallback \"alerta\" ;; load APPEND ASYNC '" + Config.static_url + "proteins/" + game_instance.proteins[j].name + "';; ";
-//    }
-//  }
+  for (var i = 1; i < game_instances.length; i++) {
+    game_instance = game_instances[i];
+    game_instance.proteins = _.shuffle(game_instance.proteins);
+    for (var j = 0; j < 3; j++) {
+      scripts[j] += "set LoadStructCallback \"alerta\" ;; load APPEND ASYNC '" + Config.static_url + "proteins/" + game_instance.proteins[j].name + "';; ";
+    }
+  }
   for (var k = 0; k < 3; k++) {
     scripts[k] += default_representation;
   }
