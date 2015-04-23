@@ -3,34 +3,7 @@ AppletCreator = Base.extend({
     this.codebase = Config.static_url + 'jmol';
 
   },
-  create2: function (applet_id, element_id, script) {
-    var string = '<object name="' + applet_id + '" id="' + applet_id + '" type="application/x-java-applet" width="220" height="220" align="middle">\n\
-                        <param name="codebase" value="' + this.codebase + '"> \n\
-                        <param name="java_arguments" value="-Xmx512m"> \n\
-                        <param name="mayscript" value="true"> \n\
-                        <param name="progresscolor" value="blue">\n\
-                        <param name="boxbgcolor" value="black">\n\
-                        <param name="boxfgcolor" value="white">\n\
-                        <param name="boxmessage" value="Downloading JmolApplet ...">\n\
-                        <param name="script" value="' + script + ';">\n\
-                        <param name="useCommandThread" value="TRUE">\n\
-                        <param name="progressbar" value="true">\n\
-                    </object>';
-//    switching to using applet instead of object because it works better apparently
-    var string = '<applet class= "protein_applet" name="' + applet_id + '" id="' + applet_id + '" code="JmolApplet" archive="JmolAppletSigned.jar"\n\
-        codebase= "' + this.codebase + '"\n\
-        width="220" height="220"  align="absmiddle"  mayscript="true">\n\
-        <param name="script" value="' + script + ';">\n\
-        <param name="progressbar" value="true">\n\
-        <param name="useCommandThread" value="TRUE">\n\
-        <param name="progresscolor" value="blue">\n\
-        <param name="boxbgcolor" value="black">\n\
-        <param name="boxfgcolor" value="white">\n\
-</applet>';
-
-    Log.debug(" creating applet, about to modify dom ...");
-    document.getElementById(element_id).innerHTML = document.getElementById(element_id).innerHTML + string;
-  },
+  
   create: function (applet_id, element_id) {
     function readyfc() {
 //      AppletLoadedDetectorByJmolScript.notice(applet_id);
@@ -47,8 +20,10 @@ AppletCreator = Base.extend({
       progressbar: "true",
       use: "HTML5",
       color: "black",
+      debug: false,
       width: "220",
       height: "220",
+      loadstructcallback: "animate",
       j2sPath: "../static/j2s",
       //script: script,
       isSigned: false,
@@ -57,17 +32,25 @@ AppletCreator = Base.extend({
       allowjavascript: true,
       readyFunction: readyfc
     };
+    
     Jmol.setAppletCss(null, "style='margin-top:45px'");
     Jmol.getApplet(applet_id, Info);
     Log.debug(" creating applet, about to modify dom ...");
-  }
-
+  },
+  
 });
-
+function animate(){
+     Applets.execute_scripts_all(["anim on","anim on","anim on"], function () {
+      //self.switch_spin();
+    });
+  }
+  
 AppletScriptExecutor = Base.extend({
   constructor: function () {
   },
   execute_script_do: function (ids, script, callback, error_callback, attempts, delay) {
+        console.log("ejecuta uno", script);
+
     if (attempts === 0) {
       Log.error(" could not execute script: " + script + " for this " + ids + ".");
       error_callback();
@@ -90,6 +73,8 @@ AppletScriptExecutor = Base.extend({
     }
   },
   execute_scripts_do: function (ids, scripts, callback, error_callback, attempts, delay) {
+        console.log("ejecuta todos", scripts);
+
     if (attempts === 0) {
       Log.error(" could not execute scripts: " + scripts + " for this " + ids + ".");
       error_callback();
@@ -192,13 +177,13 @@ AppletManager = Base.extend({
     Log.info("Applets created");
   },
   load_scripts: function () {
-    if (App.flags.first) {
-      App.flags.first = false;
-      return load_all_proteins_scripts(App.game_instances_manager.game_instances);
-    } else {
-      return load_next_level_scripts(App.game_instances_manager.game_instances);
-    }
+//    if (App.flags.first) {
+//      App.flags.first = false;
+//      return load_all_proteins_scripts(App.game_instances_manager.game_instances);
+//    } else {
+//      return load_next_level_scripts(App.game_instances_manager.game_instances);
+//    }
   }
 });
 
-Applets = new AppletManager(10, 500);
+//Applets = new AppletManager(10, 500);

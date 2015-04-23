@@ -13,6 +13,7 @@ AppletScriptExecutor = Base.extend({
   constructor: function () {
   },
   execute_script_do: function (ids, script, callback, error_callback, attempts, delay) {
+    console.log("ejecuta uno", script);
     if (attempts === 0) {
       Log.error(" could not execute script: " + script + " for this " + ids + ".");
       error_callback();
@@ -23,6 +24,7 @@ AppletScriptExecutor = Base.extend({
     }
   },
   execute_scripts_do: function (ids, scripts, callback, error_callback, attempts, delay) {
+    console.log("ejecuta todos", scripts);
     if (attempts === 0) {
       Log.error(" could not execute scripts: " + scripts + " for this " + ids + ".");
       error_callback();
