@@ -86,49 +86,44 @@ function update_game_settings() {
   Api.update_game_settings(App.game_settings);
 }
 
-function load_protein_script(p) {
-//    p.name = "movie.pdb";
-  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;;save STATE state_1;set disablePopupMenu true;anim mode PALINDROME;anim on";
-//  return "load FILES '" + Config.static_url + "proteins/d1a02n1.pdb' '" + Config.static_url + "proteins/" + p.name + "';;"+ default_representation
-  var script = "load '" + Config.static_url + "proteins/" + p.name + "';;";
-  var ps = ["d1xuvc_", "d2a6hp2", "d1jrpa2", "d1jp9a_", "d1jmva_"]
-  for (var i = 0; i < 2; i++)
-    script += "load APPEND '" + Config.static_url + "proteins/" + ps[i] + ".pdb';; ";
-  script += default_representation;
-  return script;
-  return "load '" + Config.static_url + "proteins/d1a02n1.pdb';;load APPEND '" + Config.static_url + "proteins/" + p.name + "';; " + default_representation
-}
 function load_next_level_script() {
   var default_representation = "set defaultStructureDSSP true;  zoom 540; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;;set disablePopupMenu true;";
   return "select thisModel;model next;delete selected;select thisModel;center selected;;" + default_representation;
 }
-function load_next_level_script_append(p) {
-  App.model++;
-  var default_representation = "set defaultStructureDSSP true;  zoom 540; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;;set disablePopupMenu true;";
-  return ";;select thisModel;model next;delete selected;" + ";load APPEND ASYNC '" + Config.static_url + "proteins/movie.pdb';" + default_representation + ";model " + App.model + ";;select thisModel;center selected;";
-  return ";;select thisModel;delete selected;" + ";load APPEND ASYNC '" + Config.static_url + "proteins/" + p.name + "';" + default_representation + ";model " + App.model + ";;select thisModel;center selected;";
-}
-function load_next_level_scripts(game_instances) {
+
+function load_next_level_scripts() {
   App.trigger('loading_proteins');
   result = [];
-//  if (game_instances.length > 3) {
-//    var game_instance = game_instances[3];
-//    game_instance.proteins = _.shuffle(game_instance.proteins);
-//    for (var i = 0; i < 3; i++) {
-//      result.push(load_next_level_script_append(game_instance.proteins[i]));
-//    }
-//  } else {
-    for (var i = 0; i < 3; i++) {
-      result.push(load_next_level_script());
-    }
-//  }
+  for (var i = 0; i < 3; i++) {
+    result.push(load_next_level_script());
+  }
   return result;
 }
-function alerta(){
+function alerta() {
   App.trigger("protein_loaded");
-};
+}
+function load_all_proteins_script_movies(game_instances) {
+  $("#loading_level").hide();
+  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true; anim mode PALINDROME; anim on;";
+  var game_instance = game_instances[0];
+  game_instance.proteins = _.shuffle(game_instance.proteins);
+  var scripts = ["", "", ""];
+  for (var h = 0; h < 3; h++) {
+    scripts[h] = "reset STRUCTURE; load trajectory '" + Config.static_url + "proteins/movies/" + game_instance.proteins[h].name + "';;" + default_representation;
+  }
+
+  return scripts;
+}
+function load_all_proteins_scripts_movies(game_instances) {
+  App.trigger('loading_proteins');
+  result = [];
+  var scripts = load_all_proteins_script_movies(game_instances);
+  for (var i = 0; i < 3; i++) {
+    result.push(scripts[i]);
+  }
+  return result;
+}
 function load_all_proteins_script(game_instances) {
-  var limit = game_instances.length < 3 ? game_instances.length : 3;
   var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true; ";
   var game_instance = game_instances[0];
   game_instance.proteins = _.shuffle(game_instance.proteins);
@@ -154,14 +149,6 @@ function load_all_proteins_scripts(game_instances) {
   var scripts = load_all_proteins_script(game_instances);
   for (var i = 0; i < 3; i++) {
     result.push(scripts[i]);
-  }
-  return result;
-}
-function load_proteins_scripts(proteins) {
-  App.trigger('loading_proteins');
-  result = [];
-  for (var i = 0; i < 3; i++) {
-    result.push(load_protein_script(proteins[i]));
   }
   return result;
 }

@@ -106,20 +106,12 @@ GamePanel = Panel.extend({
   },
   update_proteins: function () {
     game_instance = App.game_instances_manager.get_game_instance();
-//    game_instance.proteins = _.shuffle(game_instance.proteins);
-//      var scripts = load_proteins_scripts(game_instance.proteins);
     var scripts;
-//    if (App.flags.first) {
-//      App.flags.first = false;
-//      scripts = load_all_proteins_scripts(App.game_instances_manager.game_instances);
-//    } else {
-//      scripts = load_next_level_scripts(App.game_instances_manager.game_instances);
-//    }
     scripts = Applets.load_scripts(game_instance);
     var self = this;
     Applets.execute_scripts_all(scripts, function () {
-      self.switch_spin();
-      //update_representation_color();
+      //self.switch_spin();
+     
     });
     _.each(game_instance.proteins, function (protein, i) {
       $("#select_button" + i).unbind("click");
