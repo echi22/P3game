@@ -4,15 +4,21 @@
 		{{user.username}}!</h2>
 	<form action="/game/play" method="post" style="display: inline;">
 		{% csrf_token %} 
-        <input type="hidden" value="applet" name="game_type">
+        <input type="hidden" value="static" name="game_type">
         <input type="submit" style="display: inline;"
 			value="Jugar" />
 	</form>
 	<form action="/game/play" method="post" style="display: inline;">
 		{% csrf_token %} 
-        <input type="hidden" value="applet_imgs" name="game_type">
+        <input type="hidden" value="imgs" name="game_type">
         <input type="submit" style="display: inline;"
 			value="Jugar imgs" />
+	</form>
+	<form action="/game/play" method="post" style="display: inline;">
+		{% csrf_token %} 
+        <input type="hidden" value="movies" name="game_type">
+        <input type="submit" style="display: inline;"
+			value="Jugar Movimiento" />
 	</form>
 	<form action="/users/logout_user" method="post"
 		style="display: inline;">

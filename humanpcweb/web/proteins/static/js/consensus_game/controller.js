@@ -104,12 +104,12 @@ function alerta() {
 }
 function load_all_proteins_script_movies(game_instances) {
   $("#loading_level").hide();
-  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true; anim mode PALINDROME; anim on;";
+  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true;";
   var game_instance = game_instances[0];
   game_instance.proteins = _.shuffle(game_instance.proteins);
   var scripts = ["", "", ""];
   for (var h = 0; h < 3; h++) {
-    scripts[h] = "reset STRUCTURE; load trajectory '" + Config.static_url + "proteins/movies/" + game_instance.proteins[h].name + "';;" + default_representation;
+    scripts[h] = " load trajectory '" + Config.static_url + "proteins/movies/" + game_instance.proteins[h].name + "';;" + default_representation;
   }
 
   return scripts;

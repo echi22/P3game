@@ -121,3 +121,4 @@ levels_per_game=10
 game_instances_generator_module='web.proteins.game.game_instance_generation'
 game_instances_generator_klass='ScopGameInstanceGenerator'
 game_instances_correct_to_level_up=8
+game_type = 'movies'
