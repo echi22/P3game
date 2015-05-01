@@ -9,6 +9,7 @@ AppletCreator = Base.extend({
 //      AppletLoadedDetectorByJmolScript.notice(applet_id);
       console.log("cargado " + applet_id);
       $("#" + applet_id + "_canvas2d").attr("ready", "true");
+      
     }
 //    var script = "set antialiasDisplay;load /static/proteins/movie.pdb; anim mode PALINDROME;anim on";
     Jmol.setXHTML(element_id);
@@ -40,11 +41,11 @@ AppletCreator = Base.extend({
   
 });
 function animate(){
-     Applets.execute_scripts_all(["anim on","anim on","anim on"], function () {
+     Applets.execute_scripts_all(["animation MODE PALINDROME; anim on;","animation MODE PALINDROME; anim on","animation MODE PALINDROME; anim on"], function () {
       //self.switch_spin();
     });
   }
-  
+    
 AppletScriptExecutor = Base.extend({
   constructor: function () {
   },
@@ -114,6 +115,7 @@ AppletScriptExecutor = Base.extend({
     for (var i = 0; i < ids.length; i++) {
       Jmol.script(eval("jmolApplet" + i), scripts[i]);
     }
+    
     if (!showing) {
       App.view.game_panel.hide_proteins();
     }

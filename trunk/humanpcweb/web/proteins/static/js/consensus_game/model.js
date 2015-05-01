@@ -47,11 +47,11 @@ GameInstance = Base.extend({
 });
 
 GameSettings = Base.extend({
-  constructor: function (levels_per_game, game_instances_per_level, game_instances_correct_to_level_up) {
+  constructor: function (levels_per_game, game_instances_per_level, game_instances_correct_to_level_up, game_type) {
     this.levels_per_game = levels_per_game;
     this.game_instances_per_level = game_instances_per_level;
     this.proteins = 3;
-    this.game_type = 'jmol';
+    this.game_type = game_type;
     this.game_instances_correct_to_level_up = game_instances_correct_to_level_up;
   }
 });

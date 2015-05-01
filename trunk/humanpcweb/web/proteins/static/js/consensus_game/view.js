@@ -69,7 +69,7 @@ GamePanel = Panel.extend({
     }
   },
   loading_level: function () {
-    $("#loading_percentage").html(0+"%");
+    $("#loading_percentage").html(0 + "%");
     $("#progressbar").progressbar({
       value: 0
     });
@@ -77,11 +77,11 @@ GamePanel = Panel.extend({
   update_loading: function () {
     this.loading_percentage++;
     var p = Math.floor((this.loading_percentage * 100) / (App.game_instances_manager.game_instances.length * 3));
-    $("#loading_percentage").html(p+"%");
+    $("#loading_percentage").html(p + "%");
     $("#progressbar").progressbar({
       value: p
     });
-    if(p >=100){
+    if (p >= 100) {
       $("#loading_level").hide();
     }
   },
@@ -111,7 +111,7 @@ GamePanel = Panel.extend({
     var self = this;
     Applets.execute_scripts_all(scripts, function () {
       //self.switch_spin();
-     
+
     });
     _.each(game_instance.proteins, function (protein, i) {
       $("#select_button" + i).unbind("click");
@@ -140,13 +140,20 @@ GamePanel = Panel.extend({
 
       soundManager.play("finished_game");
       $("#send").text("Volver a jugar");
+      $("#send").click(this.play_again);
     }
 
     $("#reload").hide();
     $(".selectButton").hide();
   },
+  play_again: function(){
+   $("#game_type").val(App.game_settings.game_type);
+   $("#game_type_form").submit();
+  },
+  
   loading_message: function () {
-    if (App.flags.first)
+    console.log(App.game_settings.game_type);
+    if (App.flags.first || App.game_settings.game_type == "applet_movies")
       App.applets.executor.apply_to_jmol_windows([0, 1, 2], "hide all; set frank off; set echo middle center; font echo 19 sans; color echo [xAAAAAA]; echo Cargando proteina...; refresh;");
   }
 });

@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 
 
 def get_game_settings(request):
-  result = '{"game_instances_per_level": %d,  "levels_per_game": %d, "game_instances_correct_to_level_up": %d }' % (settings.game_instances_per_level, settings.levels_per_game, settings.game_instances_correct_to_level_up)
+  result = '{"game_instances_per_level": %d,  "levels_per_game": %d, "game_instances_correct_to_level_up": %d, "game_type": "%s" }' % (settings.game_instances_per_level, settings.levels_per_game, settings.game_instances_correct_to_level_up, settings.game_type)
   return HttpResponse(result, mimetype='application/json')
 
 def minutes_since_last_time_played(request):
@@ -51,10 +51,12 @@ def consensus_game(request):
   form = ChooseTypeForm(request.POST)
   if form.is_valid():
     game_type = form.cleaned_data["game_type"]
-    if game_type != "applet":
-      game_type = "applet_imgs"
+    if game_type != "static" and game_type != "imgs" and game_type != "movies":
+      game_type = "static"
   else:
-    game_type = "applet"
+    return HttpResponseRedirect('/login')
+#    game_type = "applet_static"
+  settings.game_type = game_type
   print game_type
   if request.user.is_anonymous():
     return HttpResponseRedirect('/users/login_or_register')
@@ -108,7 +110,7 @@ def save_comparison(selected, game_instance, user, order):
     percentage = round((profile.get_correct_comparisons() * 100) / profile.proteins_compared(), 2)
   except ZeroDivisionError:
     percentage = 0
-  c = Comparison(selected=selected, game_instance=game_instance, user=user, order=order, user_level=profile.user_level, accuracy=percentage)
+  c = Comparison(selected=selected, game_instance=game_instance, user=user, order=order, user_level=profile.user_level, accuracy=percentage, game_type=settings.game_type)
   c.save()
   score = user.get_profile().get_score()
   score.chose(game_instance.choose(selected))

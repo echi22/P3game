@@ -46,7 +46,7 @@ def register(request):
                 if(c['password'] == c['password2']):
                     
                     create(request,c['username'],c['email'],c['password'],'',False,c['birthday'],c['knows_proteins'])
-                    return HttpResponseRedirect('/game/play')
+                    return HttpResponseRedirect('/login')
                 else:
                     messages.error(request,'Las contraseñas no coinciden',extra_tags='register')
             else:
@@ -136,7 +136,7 @@ def login(request):
         if user is not None:
             if user.is_active:
                 auth.login(request, user)
-                return HttpResponseRedirect('/game/play')
+                return HttpResponseRedirect('/login')
     messages.error(request,'Usuario o contraseña incorrectos',extra_tags='login')
     return HttpResponseRedirect('/users/login_or_register')
 
@@ -147,7 +147,7 @@ def login_or_register(request):
     if(request.user.is_anonymous()):
         return render_to_response('site/index.html', context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect('/game/play')
+        return HttpResponseRedirect('/login')
 
 
 
