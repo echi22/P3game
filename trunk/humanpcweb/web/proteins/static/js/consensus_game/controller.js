@@ -104,7 +104,7 @@ function alerta() {
 }
 function load_all_proteins_script_movies(game_instances) {
   $("#loading_level").hide();
-  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone off; cartoon on; color cartoon structure; color structure; select ligand;wireframe 0.16;spacefill 0.5; color cpk ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true;";
+  var default_representation = "set defaultStructureDSSP true;  zoom 120; set measurementUnits ANGSTROMS;  select all;  spacefill off; wireframe off; backbone 0.7;cartoon off; color backbone group; select ligand;wireframe 0.16;spacefill 0.5; color Rasmol ; select all; set antialiasDisplay true;model 0;save STATE state_1;set disablePopupMenu true;";
   var game_instance = game_instances[0];
   game_instance.proteins = _.shuffle(game_instance.proteins);
   var scripts = ["", "", ""];

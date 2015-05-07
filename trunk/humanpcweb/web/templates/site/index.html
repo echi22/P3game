@@ -10,11 +10,13 @@
 </script>
 {% endblock %}
 {% block main %}
-
 <div id="banner"   >
-    <img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" width="200px">
+    <img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" width="200">
 </div>
-    <div style="clear: both"></div>
+  	<div class="menu_front">
+  		<div class="menu_center">
+          <div class="menu_inner">
+    <!--<div style="clear: both"></div>-->
     
     
     {% if not user.is_authenticated %}
@@ -29,8 +31,10 @@
         {% include  "site/widgets/login_registered.html" %}
     </div> 
     {% endif %}
-
-    <div style="clear:both"></div>
+          </div>
+        </div>
+    </div>
+    <!--<div style="clear:both"></div>-->
     
 
 

@@ -6,7 +6,6 @@ from web.proteins.models import Classification
 from web.proteins.models import Comparison
 import random
 import logging
-from web.comparisons.views import get_game_instance
 from web.utility import ClassLoader
 logger = logging.getLogger(__name__)
 

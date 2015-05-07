@@ -1,0 +1,85 @@
+.select_button{
+    text-align: center;
+    vertical-align: middle;
+     width: 6em; height: 6em;
+    -webkit-border-radius: 4.5em; -moz-border-radius: 4.5em;
+    border-radius:4.5em;
+    border: none   ;
+    background-color: white;
+    vertical-align: middle;
+    color:green;
+    text-align: right;
+    position: absolute; 
+    
+}
+ .select_button:hover{
+    cursor:pointer;
+    background-color: orange;
+}
+
+#select_button0{
+      bottom:-20px;  right:  120px;  }
+#select_button1{
+    bottom:150px;  right: -70px;
+}
+#select_button2{
+     bottom:150px;  left:-70px;
+}
+
+.protein{
+	position: relative;
+	z-index: 10;
+    width: 24em; height: 24em;
+    -webkit-border-radius: 12em; -moz-border-radius: 12em;
+    border-radius: 12em;
+    padding:0px;
+    margin:0px;
+border: white 2px solid;
+background-color: black;
+text-align: center;
+vertical-align: middle;
+  }
+
+.protein_selected{
+border: orange 2px solid;
+    }
+    
+  .protein_bottom{
+position: relative;
+      top: -30px;
+}
+
+
+#game tr,td{
+	margin:0;
+	padding: 0;
+}
+.incorrect{
+  border:red 2px solid;
+}
+.tie{
+  border:yellow 2px solid;
+}
+.correct{
+  border:green 2px solid;
+}
+
+
+.protein_applet{
+	margin:0;
+	padding:0;
+	margin-top:45px;
+	
+}
+	
+.protein_container{
+	position: relative;
+}
+#protein0{ 
+}
+#protein1{
+	 left: 50px;
+}
+#protein2{
+	right:  50px; 
+}	

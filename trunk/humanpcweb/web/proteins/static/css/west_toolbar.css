@@ -1,0 +1,297 @@
+
+.config_panel{
+  position: relative;
+  float:right;
+  overflow: hidden;
+  padding-left: 10px;
+
+
+}
+#highscores_panel_container{
+  position: relative;
+  float:left;
+  overflow: hidden;
+  padding-top: 20px;
+  padding-left: 10px;
+
+}
+
+.gradient_background_left{
+  background-image: url( "../images/gradient_background_left2.png");
+  background-position: left;
+  background-repeat: repeat-x;
+  padding: 10px;
+  padding-left: 20px;
+  height: 75px;
+  width: 100%;
+  margin: auto;
+}
+
+.config_panel_inner{
+  width: 850px;
+}
+
+#game_options ul > li{
+  display: inline-block;   /* You can also add some margins here to make it look prettier */
+  zoom:1;
+  *display:inline; /* this fix is needed for IE7- */
+  padding-top: 10px;
+  vertical-align:middle;
+  padding-left: 5px;
+}
+
+
+/* Nuevo CSS */
+
+#game-main{
+  overflow: visible
+}
+
+#game-container{
+  height: 100%;
+  overflow: visible
+}
+
+#game{
+  margin-top: 0 !important; 
+  max-width: 1024px;
+}
+
+.game_table{
+  position: relative
+}
+
+#game_proteins{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 20px;
+}
+
+.config_panel_inner {
+  max-width: 1024px !important;
+  width: auto !important;
+}
+
+.protein_container_outter{
+  width: 24em;
+}
+
+.first_row{
+  width: 100%;
+}
+
+.first_row > div > span:first-child{
+  font-size: 24px;
+}
+
+.first_row > div > span:last-child{
+  font-size: 34px;
+}
+
+.aciertos_container{
+  float: left;
+  text-align: center;
+  margin-left: 30px;
+  font-size: 24px;
+  max-width: 250px;
+  position: relative
+}
+
+.nivel_container{
+  float: left;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.scoreBoard_container{
+  float: right;
+  margin-right: 10px;
+}
+
+.help_container{
+  /*width: 33%;*/
+  /*padding: 10px 0;*/ 
+  /*  left: -45px !important;
+    text-align: center;
+    float: right;*/
+  position: absolute;
+  width: 250px;
+  z-index: 2000;
+  padding: 15px 0 0 25px;
+  text-align: center;
+}
+
+.outter_protein1, .outter_protein2{
+  position: absolute;
+  top: 210px;
+}
+
+.protein_container_outter.outter_protein0 {
+  margin-top: -20px;
+}
+.protein_container_outter.outter_protein1{
+  left: 50px;
+}
+
+.protein_container_outter.outter_protein2{
+  right: 50px
+}
+
+
+#protein1, #protein2{
+  top: 0 !important;
+}
+
+#protein1{
+  left: 0 !important;
+}
+
+#protein2{
+  right: 0 !important;
+}
+
+#select_button0, #score_container0{
+  bottom: -20px !important;
+  right: 115px !important;
+}
+
+#select_button1, #score_container1{
+  bottom: 110px !important;
+  right: -25px !important;
+}
+
+#select_button2, #score_container2{
+  bottom: 110px !important;
+  left: -25px !important;
+}
+
+.second_row{
+  margin-top: 60px;
+}
+
+#nextButtonContainer{
+  /*  margin-top: 10px !important; 
+    width: 33%!important; 
+    float: left!important; */
+  height: initial !important;
+}
+
+.spin_container{
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+body,html{
+  min-width: 365px !important;
+}
+
+.gradient_background_left{
+  width: inherit !important;
+}
+
+@media screen and (max-width: 970px){
+  .protein_container_outter.outter_protein1{
+    left: 0 !important;
+  }
+
+  .protein_container_outter.outter_protein2{
+    right: 0 !important;
+  }
+}
+
+@media screen and (max-width: 840px){
+  .spin_container h4{
+    display: none
+  }
+
+  .second_row{
+    position: absolute;
+    right: 30px;
+    top: 50px;
+  }
+  .protein_container_outter {
+    margin-top: 17px;
+  }
+}
+
+@media screen and (max-width: 740px){
+  .loading_percentage {
+    left: 42%
+  }
+
+  .second_row{
+    position: absolute;
+    right: 5px;
+    top: -30px;
+    margin-top: 0;
+  }
+
+  .config_panel_inner {
+    width: auto !important;
+  }
+
+  #game_proteins{
+    position: absolute;
+    top: 150px;
+  }
+
+  .outter_protein1, .outter_protein2 {
+    position: initial;
+  }
+
+  #protein1, #protein2{
+    margin-top: 10px !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important
+  }
+
+  .select_button, .score_container, #score_container0, #select_button0, #score_container1, #select_button1, #score_container2, #select_button2{
+    bottom: 9em !important;
+    right: -30px !important;
+    left: inherit !important;
+  }
+}
+
+.score_container{
+  top: inherit !important;
+}
+
+@media screen and (max-width: 550px){
+  #nextButtonContainer a{
+    height: 24px !important;
+    width: 80px !important;
+  }
+
+  .reload_first, .username{
+    display: none;
+  }
+  .loading_percentage {
+    left: 40%
+  }
+}
+
+@media screen and (max-width: 480px){
+  #nextButtonContainer a{
+    height: 24px !important;
+    width: 80px !important;
+  }
+
+  .reload_first, .username, .aciertos_container{
+    display: none;
+  }
+
+  .help_container{
+    top: 10px;
+    left: -5px;
+    padding: 0
+  }
+}
+
+@media screen and (max-width: 400px){
+  .protein_container_outter{
+    margin-left: 1% !important
+  }
+}

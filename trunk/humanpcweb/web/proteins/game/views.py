@@ -54,7 +54,7 @@ def consensus_game(request):
     if game_type != "static" and game_type != "imgs" and game_type != "movies":
       game_type = "static"
   else:
-    return HttpResponseRedirect('/login')
+    return HttpResponseRedirect('/')
 #    game_type = "applet_static"
   settings.game_type = game_type
   print game_type

@@ -39,6 +39,7 @@ AppletManagerMovie = AppletManager.extend({
       App.flags.first = false;
     } else {
       this.reset_applets();
+      App.applets.executor.apply_to_jmol_windows([0, 1, 2], "hide all; set frank off; set echo middle center; font echo 19 sans; color echo [xAAAAAA]; echo Cargando proteina...; refresh;");
     }
     return load_all_proteins_scripts_movies(App.game_instances_manager.game_instances);
 
