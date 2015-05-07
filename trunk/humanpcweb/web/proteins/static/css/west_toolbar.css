@@ -171,10 +171,7 @@
 }
 
 #nextButtonContainer{
-  /*  margin-top: 10px !important; 
-    width: 33%!important; 
-    float: left!important; */
-  height: initial !important;
+  height: auto !important;
 }
 
 .spin_container{
@@ -238,7 +235,7 @@ body,html{
   }
 
   .outter_protein1, .outter_protein2 {
-    position: initial;
+    position: static;
   }
 
   #protein1, #protein2{
