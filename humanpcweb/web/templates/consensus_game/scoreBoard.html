@@ -1,18 +1,16 @@
 <div style="text-align: center;">
-	
-	<table>
-		{% for i in list1 %}
-		<tr>
-			{% for j in list2 %}
-			<td><div id="instance_{{j}}_{{i}}"
-					class="circle not_played_score"></div></td> {%endfor%}
-		</tr>
-		{%endfor%}
-		<tr>
-			{% for j in list2 %}
-			<td class="score_numbers"><span>{{j|add:1}}</span></td> {%endfor%}
-		</tr>
-	</table>
-	<span class="totalScore">Puntaje Actual</span>
-	<span class="score" id="score"></span>
+<table>
+{% for i in list1 %}
+<tr>
+{% for j in list2 %}
+<td><div id="instance_{{j}}_{{i}}" class="circle not_played_score"></div></td> {%endfor%}
+</tr>
+{%endfor%}
+<tr>
+{% for j in list2 %}
+<td class="score_numbers"><span>{{j|add:1}}</span></td> {%endfor%}
+</tr>
+</table>
+<span class="totalScore">Puntaje Actual</span>
+<span class="score" id="score"></span>
 </div>

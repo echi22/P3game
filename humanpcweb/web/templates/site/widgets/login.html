@@ -1,50 +1,45 @@
-            
-        <fieldset class="border_blue  " style="height: 200px;">
-            <h2 class="titleLarge padding_bottom8 margin_bottom border_bottom">Entrar al juego</h2>
-                <form action="/users/login" method="post">
-                                                {% csrf_token %}
-                    <table>
-                        <tr>
-                            <td>
-                                 <label>
-                                    Nombre de usuario:
-                                </label>
-                            </td>
-                            <td>
-                                <input type="text" class="nice-input" name="username">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+<fieldset class="border_blue" style="height: 200px;">
+  <h2 class="titleLarge padding_bottom8 margin_bottom border_bottom">Entrar al juego</h2>
+  <form action="/users/login" method="post">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>
+          <label>
+            Nombre de usuario:
+          </label>
+        </td>
+        <td>
+          <input type="text" class="nice-input" name="username">
+        </td>
+      </tr>
+      <tr>
+        <td>
 
-                                   <label>
-                                        Contraseña:
-                                    </label>
-                            </td>
-                            <td>
-                                    <input type="password"class="nice-input" name="password">
-                            </td>
-                        </tr>
-                         <tr >
-                            <td colspan="2"  colspan="2" height="40px;" align="center" valign="bottom">
+          <label>
+            Contraseña:
+          </label>
+        </td>
+        <td>
+          <input type="password"class="nice-input" name="password">
+        </td>
+      </tr>
+      <tr >
+        <td colspan="2"  colspan="2" height="40px;" align="center" valign="bottom">
 
-                                   <input type="submit" value="Entrar">
-                            </td>
-                        </tr>
-                          <tr>
-                            	<td colspan="2">{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    {% if message.tags == 'login error' %}
-    <li class="{{ message.tags }}"style="font-size: 14px; color: red;">{{ message }}</li>{% endif %} 
-    {% endfor %}
-</ul>
-{% endif %}</td>
-                            </tr>
-                    </table>
-                       
-                         
-                        
-                    </form>
-        </fieldset>
-        
+          <input type="submit" value="Entrar">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">{% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+            {% if message.tags == 'login error' %}
+            <li class="{{ message.tags }}"style="font-size: 14px; color: red;">{{ message }}</li>{% endif %} 
+            {% endfor %}
+          </ul>
+          {% endif %}</td>
+      </tr>
+    </table>
+  </form>
+</fieldset>

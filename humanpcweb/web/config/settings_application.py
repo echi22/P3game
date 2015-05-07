@@ -64,7 +64,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'proteins',
-    'classification_game',
     'django.contrib.admin',
     'django.contrib.admindocs',
 )
