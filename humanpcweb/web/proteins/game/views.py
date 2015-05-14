@@ -230,9 +230,17 @@ def get_comparisons_json(profile, game, level):
   result = "[" + result + "]"
   return result
 
+
 def show_highscore_table(request):
+
+  form = ChooseTypeForm(request.POST)
+  if form.is_valid():
+    game_type = form.cleaned_data["game_type"]
+    if game_type != "static" and game_type != "imgs" and game_type != "movies":
+      game_type = "static"
   scores = []
   newList = []
+  print game_type
   for p in User.objects.all():      
         
     try:
@@ -242,7 +250,7 @@ def show_highscore_table(request):
     except:
       print ""      
   sorted_scores = sorted(scores, key=lambda k: (-k['user_level'], -k['avg_score']))
-  c = {"sorted_scores":sorted_scores}
+  c = {"sorted_scores":sorted_scores, "game_type" : game_type}
   c.update(csrf(request))
   print c
   return render_to_response('consensus_game/highscore_table.html', c, context_instance=RequestContext(request))

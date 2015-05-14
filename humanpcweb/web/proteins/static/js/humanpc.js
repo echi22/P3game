@@ -101,7 +101,7 @@ FullScreen= {
 
     } else {
 
-      $( "#fullscreen_panel").hide();
+//      $( "#fullscreen_panel").hide();
       var  message='SORRY: Your browser does not support FullScreen';
 //      Log.warn(message);
     //	fsStatus.innerHTML = message;
