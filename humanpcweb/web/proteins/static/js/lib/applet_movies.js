@@ -26,7 +26,10 @@ AppletManagerMovie = AppletManager.extend({
       }
     }
     delete (eval(id));
-    $("#" + id + "_canvas2d").remove();
+    if (id === "jmolApplet2")
+      $("#" + id + "_2dappletdiv").parent().parent().empty();
+    else
+      $("#" + id + "_canvas2d").remove();
     Jmol.getApplet(id, Info);
   },
   reset_applets: function () {

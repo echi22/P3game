@@ -1,51 +1,28 @@
-Sound= {
-
-configure_sound_manager: function(){
-soundManager.debugMode = false;
-soundManager.url = Config.static_url+'sound/swf/'; // directory where SM2 .SWFs live
-soundManager.waitForWindowLoad = false;
-soundManager.flashVersion = 9;
-soundNames=[ "win", "lose", "level_up", "finished_game"];
-//soundManager.mute();
-
-/*
- * Note that SoundManager will determine and append the appropriate .SWF file to the URL,
- * eg. /path/to/sm2-flash-files/soundmanager2.swf automatically.
- *
- * Bonus: Read up on HTML5 audio support1, if you're feeling adventurous.
- * iPad/iPhone and devices without flash installed will always attempt to use it.
- *
- * Also, See the flashblock demo2 when you want to start getting fancy.
-*/
-
-// disable debug mode after development/testing..
-
-
-// The basics: onready() callback
-
-soundManager.onready(function(){
-
-  // SM2 has loaded - now you can create and play sounds!
-  for (i in soundNames){
-   soundManager.createSound({
-    id: soundNames[i],
-    url: Config.static_url+ 'sounds/'+soundNames[i]+'.mp3'
-    // onload: myOnloadHandler,
-    // other options here..
-  });
+SoundManager = Base.extend({
+  constructor: function () {
+    this.ids = ["win", "lose", "finished_game", "level_up"];
+  },
+  load_audio: function (sound) {
+    this.ids[sound] = new Audio(Config.static_url + 'sounds/' + sound + '.mp3');
+  },
+  load_all_audios: function () {
+    for (var i = 0; i < this.ids.length; i++) {
+      this.load_audio(this.ids[i]);
+    }
+  },
+  play: function (sound) {
+    this.ids[sound].play();
+  },
+  mute: function () {
+    for (var i = 0; i < this.ids.length; i++) {
+      this.ids[i].mute = true;
+    }
+  },
+  unmute: function () {
+    for (var i = 0; i < this.ids.length; i++) {
+      this.ids[i].mute = false;
+    }
   }
-
 });
 
-// Optional: ontimeout() callback for handling start-up failure
-
-soundManager.ontimeout(function(){
-  Log.error( "Could not load sound manager ");
-  // Hrmm, SM2 could not start. Flash blocker involved? Show an error, etc.?
-//  alert( " whoops ");
-});
-
-}
-
-}
- Sound.configure_sound_manager();
+soundManager = new SoundManager();
