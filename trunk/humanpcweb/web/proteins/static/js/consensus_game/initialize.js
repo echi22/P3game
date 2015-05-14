@@ -26,7 +26,7 @@ Initialize = {
 
   },
   initialize: function () {
-
+    soundManager.load_all_audios();
     Log.info("Initializing... ");
     Log.info("getting user... ");
     Api.get_user(function (user) {
