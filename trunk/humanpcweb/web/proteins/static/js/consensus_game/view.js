@@ -151,11 +151,16 @@ GamePanel = Panel.extend({
    $("#game_type_form").submit();
   },
   
+  show_highscores: function(){
+   $("#game_type_highscore").val(App.game_settings.game_type);
+   $("#highscore_form").submit();
+  },
+  
   loading_message: function () {
     console.log(App.game_settings.game_type);
     if (App.flags.first)
       App.applets.executor.apply_to_jmol_windows([0, 1, 2], "hide all; set frank off; set echo middle center; font echo 19 sans; color echo [xAAAAAA]; echo Cargando proteina...; refresh;");
-  }
+}
 });
 
 ProteinSelectionPanel = Panel.extend({

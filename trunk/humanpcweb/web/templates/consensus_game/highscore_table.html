@@ -1,154 +1,160 @@
 {% extends "base.html" %}
 {%block extraJs %}
 <script>
-	$(function() {
-		$( "#play" ).button();
-	});
-	$(function() {
-		$( "#salir" ).button();
-		$('#example').dataTable(2);
-	});
+  $(function () {
+    function play(e) {
+      e.preventDefault();
+      $("#game_type_form").submit();
+    }
+    $("#play").button();
+    $("#play").click(play);
+  });
+  $(function () {
+    $("#salir").button();
+    $('#example').dataTable(2);
+  });
 </script>
 <style>
-.CSSTableGenerator {
-	margin:0px;padding:0px;
-	width:100%;
-	
-	-moz-border-radius-bottomleft:0px;
-	-webkit-border-bottom-left-radius:0px;
-	border-bottom-left-radius:0px;
-	
-	-moz-border-radius-bottomright:0px;
-	-webkit-border-bottom-right-radius:0px;
-	border-bottom-right-radius:0px;
-	
-	-moz-border-radius-topright:0px;
-	-webkit-border-top-right-radius:0px;
-	border-top-right-radius:0px;
-	
-	-moz-border-radius-topleft:0px;
-	-webkit-border-top-left-radius:0px;
-	border-top-left-radius:0px;
-}.CSSTableGenerator table{
+  .CSSTableGenerator {
+    /*margin:0px;padding:0px;*/
+    /*width:100%;*/
+
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+  }.CSSTableGenerator table{
     border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
-	height:100%;
-	margin:0px;padding:0px;
-}.CSSTableGenerator tr:last-child td:last-child {
-	-moz-border-radius-bottomright:0px;
-	-webkit-border-bottom-right-radius:0px;
-	border-bottom-right-radius:0px;
-}
-.CSSTableGenerator table tr:first-child td:first-child {
-	-moz-border-radius-topleft:0px;
-	-webkit-border-top-left-radius:0px;
-	border-top-left-radius:0px;
-}
-.CSSTableGenerator table tr:first-child td:last-child {
-	-moz-border-radius-topright:0px;
-	-webkit-border-top-right-radius:0px;
-	border-top-right-radius:0px;
-}.CSSTableGenerator tr:last-child td:first-child{
-	-moz-border-radius-bottomleft:0px;
-	-webkit-border-bottom-left-radius:0px;
-	border-bottom-left-radius:0px;
-}.CSSTableGenerator tr:hover td{
-	
-}
-.CSSTableGenerator tr:nth-child(odd){ background-color:#706f6f; }
-.CSSTableGenerator tr:nth-child(even)    { background-color:#a8a8a8; }.CSSTableGenerator td{
-	vertical-align:middle;
-	
-	
-	border:1px solid #ffffff;
-	border-width:0px 1px 1px 0px;
-	text-align:center;
-	padding:7px;
-	font-size:16px;
-	font-family:Arial;
-	font-weight:normal;
-	color:#f9f7f7;
-}.CSSTableGenerator tr:last-child td{
-	border-width:0px 1px 0px 0px;
-}.CSSTableGenerator tr td:last-child{
-	border-width:0px 0px 1px 0px;
-}.CSSTableGenerator tr:last-child td:last-child{
-	border-width:0px 0px 0px 0px;
-}
-.CSSTableGenerator tr:first-child td{
-		background:-o-linear-gradient(bottom, #4f4c4c 5%, #4f4c4c 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4f4c4c), color-stop(1, #4f4c4c) );
-	background:-moz-linear-gradient( center top, #4f4c4c 5%, #4f4c4c 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#4f4c4c", endColorstr="#4f4c4c");	background: -o-linear-gradient(top,#4f4c4c,4f4c4c);
+    border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
+  }.CSSTableGenerator tr:last-child td:last-child {
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+  }
+  .CSSTableGenerator table tr:first-child td:first-child {
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+  }
+  .CSSTableGenerator table tr:first-child td:last-child {
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+  }.CSSTableGenerator tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+  }.CSSTableGenerator tr:hover td{
 
-	background-color:#4f4c4c;
-	border:0px solid #ffffff;
-	text-align:center;
-	border-width:0px 0px 1px 1px;
-	font-size:22px;
-	font-family:Arial;
-	font-weight:bold;
-	color:#f7f4f4;
-}
-.CSSTableGenerator tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #4f4c4c 5%, #4f4c4c 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4f4c4c), color-stop(1, #4f4c4c) );
-	background:-moz-linear-gradient( center top, #4f4c4c 5%, #4f4c4c 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#4f4c4c", endColorstr="#4f4c4c");	background: -o-linear-gradient(top,#4f4c4c,4f4c4c);
+  }
+  .CSSTableGenerator tr:nth-child(odd){ background-color:#706f6f; }
+  .CSSTableGenerator tr:nth-child(even)    { background-color:#a8a8a8; }.CSSTableGenerator td{
+    vertical-align:middle;
 
-	background-color:#4f4c4c;
-}
-.CSSTableGenerator tr:first-child td:first-child{
-	border-width:0px 0px 1px 0px;
-}
-.CSSTableGenerator tr:first-child td:last-child{
-	border-width:0px 0px 1px 1px;
-}</style>
+
+    border:1px solid #ffffff;
+    border-width:0px 1px 1px 0px;
+    text-align:center;
+    padding:7px;
+    font-size:16px;
+    font-family:Arial;
+    font-weight:normal;
+    color:#f9f7f7;
+  }.CSSTableGenerator tr:last-child td{
+    border-width:0px 1px 0px 0px;
+  }.CSSTableGenerator tr td:last-child{
+    border-width:0px 0px 1px 0px;
+  }.CSSTableGenerator tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+  }
+  .CSSTableGenerator tr:first-child td{
+    background:-o-linear-gradient(bottom, #4f4c4c 5%, #4f4c4c 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4f4c4c), color-stop(1, #4f4c4c) );
+    background:-moz-linear-gradient( center top, #4f4c4c 5%, #4f4c4c 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#4f4c4c", endColorstr="#4f4c4c");	background: -o-linear-gradient(top,#4f4c4c,4f4c4c);
+
+    background-color:#4f4c4c;
+    border:0px solid #ffffff;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:22px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#f7f4f4;
+  }
+  .CSSTableGenerator tr:first-child:hover td{
+    background:-o-linear-gradient(bottom, #4f4c4c 5%, #4f4c4c 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4f4c4c), color-stop(1, #4f4c4c) );
+    background:-moz-linear-gradient( center top, #4f4c4c 5%, #4f4c4c 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#4f4c4c", endColorstr="#4f4c4c");	background: -o-linear-gradient(top,#4f4c4c,4f4c4c);
+
+    background-color:#4f4c4c;
+  }
+  .CSSTableGenerator tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+  }
+  .CSSTableGenerator tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+  }</style>
 {% endblock %}
 {% block main %}
 
 <div id="banner"   >
-    <img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" width="250px">
+  <div class="banner_img">
+    <img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" width="200">
+  </div>
+  <!--<img align="center" src="{{STATIC_URL}}images/backgrounds/p3.png" width="250px">-->
 </div>
-    <div style="clear: both"></div>
-           
-      <div style="text-align: center; padding: 60px; width:600px; margin:auto;" class="CSSTableGenerator">
-	<table id="example">
-		<thead>
-		<tr>
-			<th>Jugador</th>
-			<th>Nivel</th>
-			<th>Aciertos Totales</th>
-		</tr>
-		</thead>
-		<tbody>
-		{% for p in sorted_scores %}
-		<tr>
-			
-			<td>{{p.username}}</td> 
-			<td>{{p.user_level}}</td> 
-			<td>{{p.avg_score}}</td> 
-		</tr>
-		{%endfor%}
-		</tbody>
-	</table>
-	
+<div style="clear: both"></div>
+
+<div class="CSSTableGenerator highscore_table">
+  <table id="example">
+    <thead>
+      <tr>
+        <th>Jugador</th>
+        <th>Nivel</th>
+        <th>Aciertos Totales</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in sorted_scores %}
+      <tr>
+
+        <td>{{p.username}}</td> 
+        <td>{{p.user_level}}</td> 
+        <td>{{p.avg_score}}</td> 
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+
 </div>
-                       
-                     
-       
+<div style="clear:both"></div>
+<div style="display: hidden">
+  <form action="/game/play" method="post" id="game_type_form" style="display: inline;">
+    {% csrf_token %} 
+    <input type="hidden" value="{{game_type}}" name="game_type" id="game_type">
+  </form>
+</div>
+<div class="highscore_buttons">
+  <a href="#" id="play" ><span >Volver al juego</span></a>
+  <a href="/" id="salir" ><span >Salir</span></a>    
 
-    <div style="clear:both"></div>
-    <div style="text-align: center; padding-top: 5px;">
-    	<a href="/game/play" id="play" ><span >Volver a jugar</span></a>
-    	 			 <a href="/users/logout_user" id="salir" ><span >Salir</span></a>    
-    	
-    </div>
-    
-    
+</div>
 
-    
 {% endblock %}
 
 
 
-            

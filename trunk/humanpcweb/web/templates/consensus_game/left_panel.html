@@ -10,8 +10,14 @@
             <span class="username" id="username"></span>
           </li>  
           <li>
-            <div  id="fullscreen_panel">
-              <input type="image" src="{{STATIC_URL}}images/buttons/ranking.png" style="width:35px; height: 35px" onclick="window.location.href = 'show_highscore_table'">
+            <div  id="ranking_panel">
+              <input type="image" src="{{STATIC_URL}}images/buttons/ranking.png" style="width:35px; height: 35px" onclick="App.view.game_panel.show_highscores()">
+            </div>
+            <div style="display: hidden">
+              <form action="/game/show_highscore_table" method="post" id="highscore_form" style="display: inline;">
+                {% csrf_token %} 
+                <input type="hidden" value="" name="game_type" id="game_type_highscore">
+              </form>
             </div>
           </li>
           <li>
@@ -26,8 +32,7 @@
             </div>
           </li>
           <li>
-            <div  id="sound">
-
+            <div  id="exit">
               <a href="/">  <input id="mute" type="image" style="width: 35px; height: 35px;" src="{{STATIC_URL}}images/buttons/logout.png" ></a>
             </div>
           </li>
@@ -36,11 +41,11 @@
       </div>
 
     </div>
-<!--     <div id="highscores_panel_container"> 
-                 <h2> 
-                     Level <span id="highscores_panel_level"> </span> 
-                 </h2> 
-
-     </div> -->
+    <!--     <div id="highscores_panel_container"> 
+                     <h2> 
+                         Level <span id="highscores_panel_level"> </span> 
+                     </h2> 
+    
+         </div> -->
   </div>
 </div>

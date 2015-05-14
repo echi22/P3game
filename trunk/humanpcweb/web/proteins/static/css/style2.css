@@ -488,6 +488,19 @@ h2 {
   text-align: center;
 }
 
+.highscore_table{
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+  width: 90%;
+}
+
+.highscore_buttons{
+  text-align: center;
+  padding-top: 5px;
+  min-width: 200px;
+}
+
 @media screen and (min-width: 800px){
 
   .left_column {
@@ -522,5 +535,9 @@ h2 {
     position: relative;
     top: 0;
     right: 0; 
+  }
+
+  .highscore_buttons a:first-child{
+    margin-bottom: 8px;
   }
 }
