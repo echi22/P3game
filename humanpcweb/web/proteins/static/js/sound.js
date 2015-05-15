@@ -1,6 +1,7 @@
 SoundManager = Base.extend({
   constructor: function () {
     this.ids = ["win", "lose", "finished_game", "level_up"];
+    this.muted = false;
   },
   load_audio: function (sound) {
     this.ids[sound] = new Audio(Config.static_url + 'sounds/' + sound + '.mp3');
@@ -11,17 +12,14 @@ SoundManager = Base.extend({
     }
   },
   play: function (sound) {
-    this.ids[sound].play();
+    if (!this.muted)
+      this.ids[sound].play();
   },
   mute: function () {
-    for (var i = 0; i < this.ids.length; i++) {
-      this.ids[i].mute = true;
-    }
+    this.muted = true;
   },
   unmute: function () {
-    for (var i = 0; i < this.ids.length; i++) {
-      this.ids[i].mute = false;
-    }
+    this.muted = false;
   }
 });
 

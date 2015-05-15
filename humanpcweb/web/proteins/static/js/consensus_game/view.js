@@ -100,8 +100,10 @@ GamePanel = Panel.extend({
   clear_gui: function () {
     $(".protein").removeClass("incorrect correct tie");
     $(".votes").removeClass("incorrect_bg correct_bg tie_bg");
-    $("#send").hide();
-    $("#reload").show();
+//    $("#send").hide();
+//    $("#reload").show();
+    $("#send").addClass("flip");
+    $("#reload").removeClass("flip");
     $(".selectButton").show();
   },
   update_proteins: function () {
@@ -110,7 +112,7 @@ GamePanel = Panel.extend({
     scripts = Applets.load_scripts(game_instance);
     var self = this;
     Applets.execute_scripts_all(scripts, function () {
-      //self.switch_spin();
+    self.switch_spin();
 
     });
     _.each(game_instance.proteins, function (protein, i) {
@@ -128,14 +130,16 @@ GamePanel = Panel.extend({
   },
   switch_spin: function () {
     var spinCommand = ($("#spin").is(':checked')) ? "spin on" : "spin off";
-//    App.applets.execute_script_all(spinCommand);
+    App.applets.execute_script_all(spinCommand);
     App.game_settings.spin = $("#spin").is(':checked');
   },
   select_feedback: function () {
 
     $("#protein" + App.game_instances_manager.get_game_instance().different_index).addClass("correct");
     $("#score_container" + App.game_instances_manager.get_game_instance().different_index).addClass("correct_bg");
-    $("#send").show();
+//    $("#send").show();
+    $("#send").removeClass("flip");
+    $("#reload").addClass("flip");
     if (App.game_score.level == (App.game_settings.levels_per_game - 1)) {
 
       soundManager.play("finished_game");
@@ -143,7 +147,7 @@ GamePanel = Panel.extend({
       $("#send").click(this.play_again);
     }
 
-    $("#reload").hide();
+//    $("#reload").hide();
     $(".selectButton").hide();
   },
   play_again: function(){

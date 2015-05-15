@@ -36,7 +36,7 @@
       <div class="second_row">
         <div id="nextButtonContainer">
           <a onclick="location.reload()"  style="cursor:pointer;" id="reload" class="classname recargar"><span class="reload_first"> ¿No se ve una proteína?<br></span>Recargar trío</a>
-          <a style="display:none; cursor:pointer;"  id="send" class="classname next">Siguiente  trío</a>
+          <a style="cursor:pointer;"  id="send" class="classname next flip">Siguiente  trío</a>
         </div>
         <div class="spin_container">
           <input type="checkbox"  id="spin" checked="checked"/> 
@@ -58,24 +58,54 @@
     </form>
   </div>
   <script type="text/javascript">
-      $(window).scroll(function(){
+    $(window).scroll(function () {
       if ($(this).scrollTop() > 95) {
-          $('#loading_level').addClass('fixed');
+        $('#loading_level').addClass('fixed');
       } else {
-          $('#loading_level').removeClass('fixed');
+        $('#loading_level').removeClass('fixed');
       }
-  });
+    });
   </script>
   <style type="text/css">
+    .recargar.flip{
+      -moz-transform: perspective(1000px) rotateY(-180deg);
+      -ms-transform: perspective(1000px) rotateY(-180deg);
+      -webkit-transform: perspective(1000px) rotateY(-180deg);
+      transform: perspective(1000px) rotateY(-180deg);
+    }
     .recargar{
+      backface-visibility: hidden;
       height:46px;
       line-height:18px;
       width:144px;
+      -moz-transition: -moz-transform 0.8s ease-out 0s, transform 0.8s ease-out 0s;
+      -o-transition:  -ms-transform 0.8s ease-out 0s, transform 0.8s ease-out 0s;
+      -webkit-transition: -webkit-transform 0.8s ease-out 0s, transform 0.8s ease-out 0s;
+      transition: transform 0.8s ease-out 0s, -ms-transform 0.8s ease-out 0s;
+      position: absolute;
+      left:0;
+      right: 0;
+    }
+    .next.flip{
+      -moz-transform: perspective(1000px) rotateY(180deg);
+      -ms-transform: perspective(1000px) rotateY(180deg);
+      -webkit-transform: perspective(1000px) rotateY(180deg);
+      transform: perspective(1000px) rotateY(180deg);
     }
     .next{
+      backface-visibility: hidden;
       height:33px;
       line-height:33px;
-      width:113px;}
+      width:113px;
+      padding: 10px 6.5px;
+      -moz-transition: -moz-transform 0.8s ease-out 0s, transform 0.8s ease-out 0s;
+      -o-transition:  -ms-transform 0.8s ease-out 0s, transform 0.8s ease-out 0s;
+      -webkit-transition: -webkit-transform 0.8s ease-out 0s, transform 0.8s ease-out 0s;
+      transition: transform 0.8s ease-out 0s, -ms-transform 0.8s ease-out 0s;
+      position: absolute;
+      left:0;
+      right: 0;
+    }
     .classname {
       -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
       -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
