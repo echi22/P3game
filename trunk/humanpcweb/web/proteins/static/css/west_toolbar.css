@@ -171,7 +171,10 @@
 }
 
 #nextButtonContainer{
-  height: auto !important;
+  /*height: auto !important;*/
+  height: 50px;
+  position: relative;
+  width: 150px;
 }
 
 .spin_container{
@@ -208,6 +211,11 @@ body,html{
     right: 30px;
     top: 50px;
   }
+
+  #reload{
+    right: 0;
+  }
+
   .protein_container_outter {
     margin-top: 17px;
   }
@@ -261,6 +269,17 @@ body,html{
     height: 24px !important;
     width: 80px !important;
   }
+
+  #nextButtonContainer{
+    height: 30px;
+    position: relative;
+    width: 80px;
+  }
+
+  .next{
+    line-height: 25px !important;
+    padding: 0 !important;
+  } 
 
   .reload_first, .username{
     display: none;

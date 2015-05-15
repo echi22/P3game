@@ -42,7 +42,7 @@ AppletCreator = Base.extend({
 });
 function animate(){
      Applets.execute_scripts_all(["animation MODE PALINDROME; anim on;","animation MODE PALINDROME; anim on","animation MODE PALINDROME; anim on"], function () {
-      //self.switch_spin();
+      self.switch_spin();
     });
   }
     
