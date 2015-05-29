@@ -110,11 +110,11 @@ def save_comparison(selected, game_instance, user, order):
     percentage = round((profile.get_correct_comparisons() * 100) / profile.proteins_compared(), 2)
   except ZeroDivisionError:
     percentage = 0
-  c = Comparison(selected=selected, game_instance=game_instance, user=user, order=order, user_level=profile.user_level, accuracy=percentage, game_type=settings.game_type)
+  c = Comparison(selected=selected, game_instance=game_instance, user=user, order=order, accuracy=percentage, score = profile.score)
   c.save()
-  score = user.get_profile().get_score()
-  score.chose(game_instance.choose(selected))
-  score.save()
+  
+  profile.score.chose(game_instance.choose(selected))
+  profile.score.save()
 
 
 def get_game_instances_json(request):
@@ -122,11 +122,14 @@ def get_game_instances_json(request):
   profile = request.user.get_profile()
   level = profile.level 
   game = profile.game
+  level_attempt = profile.level_attempt
 #  game_instances = list(generator.get_game_instances_not_played(game, level, request.user))
   game_instances = list();
-  for x in range(level, 10):
-    game_ins = list(generator.get_game_instances_not_played(game, x, request.user))
+  
+  game_ins = list(generator.get_game_instances_not_played(level_attempt, level, request.user))
+  for x in range(profile.score.game_instances_played, 10):
     game_instances.append(game_ins.pop())
+    print x
 #  shuffle(game_instances) 
   result = [game_instance.json2() for game_instance in game_instances]
   

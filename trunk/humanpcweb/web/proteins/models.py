@@ -18,27 +18,26 @@ class UserProfile(models.Model):
   user = models.OneToOneField(User)
   anonymous = models.BooleanField()
   game= models.IntegerField()
+  score = models.ForeignKey(Score)
   #is the level of proteins (from 1 to 10) in wich the user is playing
   level= models.IntegerField()
   #is the real user level
-  user_level = models.IntegerField()
-  points =  models.IntegerField()
+  level_attempt = models.IntegerField()
   birthday = models.DateField()
   knows_proteins = models.BooleanField()
-  best_score_in_level = models.IntegerField()
   def json(self):
     anonymous = 'true' if self.anonymous else 'false'
-    return '{ "user": %d, "anonymous": "%s", "proteins_compared": %d, "level": %d, "game": %d,"points": %d, "user_level":%d, "best_score_in_level":%d}'  % (self.user.id,anonymous, self.proteins_compared(),self.level,self.game,self.points,self.user_level,self.best_score_in_level)
+    return '{ "user": %d, "anonymous": "%s", "proteins_compared": %d, "level": %d, "game": %d, "level_attempt":%d}'  % (self.user.id,anonymous, self.proteins_compared(),self.level,self.game,self.level_attempt)
   def proteins_compared(self):
     return Comparison.objects.filter(user=self.user).count()
   def get_correct_comparisons(self):
       return Score.objects.filter(user=self.user).aggregate(Sum('game_instances_correct'))["game_instances_correct__sum"]
   def get_score (self):
-        return Score.objects.get(user=self.user, level=self.level, game=self.game)
+        return Score.objects.get(user=self.user, game=self.game)
   def get_scores_from_game(self,game):
       return Score.objects.filter(user=self.user).filter(game=game)
-  def get_comparisons(self,game, level):
-      return Comparison.objects.filter(user=self.user,game= game, level= level) 
+  def get_comparisons(self,game):
+      return Comparison.objects.filter(user=self.user,game= game) 
   def get_points_from_game(self,game):
       game_scores = self.get_scores_from_game(game)
       points = 0
@@ -46,19 +45,16 @@ class UserProfile(models.Model):
           points += game_score.game_instances_correct
       return points
   def new_game(self):
-      self.game+=1
-      self.level=0
-      self.points = 0
+      self.game+=1      
       self.save()
-      Score.for_user(self.user, self.game, self.level).save()    
+      self.score = Score.for_user(self.user, profile.game, profile.level).save()   
   def reset_score(self):
       self.game=0
       self.level=0
       self.points = 0
       self.user_level = 0
-      self.best_score_in_level = 0
       self.save()
-      Score.for_user(self.user, self.game, self.level).save()
+      self.score = Score.for_user(self.user, profile.game, profile.level).save()   
       
 class Protein(models.Model):
   name = models.CharField(max_length=200)
@@ -78,15 +74,16 @@ class Protein(models.Model):
     cath=  self.cath().json()
     return '{"id": "%s", "description": "%s", "name": "%s", "code": "%s", "scop": %s, "cath": %s}'  % (self.id, self.description, self.name, self.code, scop, cath)
 Result=Enumeration('Result',['win','tie','lose'])
+GameType=Enumeration('GameType',['movies','static','images'])
 class GameInstance(models.Model):
     different=models.ForeignKey(Protein,related_name="different")
+    different_movies=models.ForeignKey(Protein,related_name="different_movies")
     p1=models.ForeignKey(Protein,related_name="p1")
     p2=models.ForeignKey(Protein,related_name="p2")
     p3=models.ForeignKey(Protein,related_name="p3")
     level=models.IntegerField()
-    game=models.IntegerField()
+    level_attempt=models.IntegerField()
     times_played=models.IntegerField()
-    ts=models.DateTimeField(auto_now_add=True)
     
     def proteins( self ):
       return [ self.p1, self.p2, self.p3]
@@ -98,7 +95,7 @@ class GameInstance(models.Model):
       classification2=Classification.objects.filter(protein=self.p2)[0]
       classification3=Classification.objects.filter(protein=self.p3)[0]
       json_serializer = serializers.get_serializer("json")()
-      json_serializer.serialize([self,self.p1,self.p2,self.p3,self.different,classification1,classification2,classification3], ensure_ascii=False)
+      json_serializer.serialize([self,self.p1,self.p2,self.p3,self.different,classification1,classification2,classification3,self.different_movies], ensure_ascii=False)
       return json_serializer.getvalue()
     def get_different_according_to_cath(self):
         return ClassificationComparator(ClassificationComparator.CathClassification).get_different(self.p1,self.p2,self.p3)
@@ -119,26 +116,14 @@ class GameInstance(models.Model):
         vote.append(Comparison.objects.filter(game_instance=self).filter(selected=self.p2.id).count())
         vote.append(Comparison.objects.filter(game_instance=self).filter(selected=self.p3.id).count())
         return vote
-    def choose(self,selected):
-        if selected.id== self.different.id:
+    def choose(self,selected,game_type):
+        if(game_type == GameType.movies):
+          correct = self.different_movies
+        else:
+          correct = self.different
+        if selected.id== correct.id:
             return Result.win
         else:
-            return Result.lose
-    def choose2(self,selected):
-        votes=self.get_votes()
-        cath=self.get_different_according_to_cath()
-        if not(cath == None):
-            votes[self.index_of_protein(cath)]+=1
-        votes[self.index_of_protein(self.different)]+=1
-        max_number=max(votes)
-        
-        if(votes[self.index_of_protein(selected)] == max_number):
-            if(votes.count(max_number) > 1):
-                return Result.tie
-            else:
-                return Result.win
-        else:
-            
             return Result.lose
     def index_of_protein(self,protein):
         return self.proteins().index(protein)
@@ -148,9 +133,8 @@ class Comparison(models.Model):
   selected = models.ForeignKey(Protein, related_name="selected")
   game_instance = models.ForeignKey(GameInstance)
   order = models.CharField(max_length=100)
-  user_level = models.IntegerField()
   accuracy = models.FloatField()
-  game_type=models.CharField(max_length=20)
+  score = models.ForeignKey(Score)
   def json(self):
       return '{"user": %d, "game_instance": %d}' % (self.user.id,self.game_instance.id)
 class ComparisonProtein(models.Model):
@@ -202,30 +186,25 @@ class Score(models.Model):
     game_instances_played=models.IntegerField()
     game_instances_correct=models.IntegerField()
     game= models.IntegerField()
+    comparisons = models.ManyToMany(Comparison)
     level= models.IntegerField()
-    user_level = models.IntegerField()
+    game_type = models.CharField(max_length=200,choices=GameType)
     @staticmethod
-    def for_user(user, game, level):
-        return Score(user=user,game_instances_played=0, game_instances_correct=0, game= game, level= level,user_level=user.get_profile().user_level)
+    def for_user(user, game,level):
+        return Score(user=user,game_instances_played=0, game_instances_correct=0, game= game, level =level)
     def chose(self, result):
      self.game_instances_played+=1     
      profile=self.user.get_profile() 
      if(result== Result.win):
         self.game_instances_correct+=1     
-        profile.points+=1
         profile.save()      
-     if(self.game_instances_played == settings.game_instances_per_level):
-        profile.level+=1        
-        if(profile.level== settings.levels_per_game):
-            if(profile.points > profile.best_score_in_level):
-                profile.best_score_in_level = profile.points
-            if(profile.points >= settings.game_instances_correct_to_level_up):                
-                profile.user_level+=1
-                profile.best_score_in_level = 0
-            profile.new_game()
+     if(self.game_instances_played == settings.levels_per_game):                        
+        if(profile.game_instances_correct >= settings.game_instances_correct_to_level_up):                
+            profile.level+=1
         else:
-            Score.for_user(self.user, profile.game, profile.level).save()            
-        profile.save()
+            profile.level_attempt = (profile.level_attempt + 1)  % settings.max_attempts_per_level
+        profile.new_game()                    
+    profile.save()
 
     def efficacy(self):
       return self.game_instances_correct*100/self.game_instances_played if not (self.game_instances_played==0) else 0

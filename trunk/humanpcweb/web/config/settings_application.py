@@ -117,6 +117,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 AUTH_PROFILE_MODULE = 'proteins.UserProfile'
 game_instances_per_level= 1
 levels_per_game=10
+max_attempts_per_level = 2
 game_instances_generator_module='web.proteins.game.game_instance_generation'
 game_instances_generator_klass='ScopGameInstanceGenerator'
 game_instances_correct_to_level_up=8

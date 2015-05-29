@@ -50,3 +50,9 @@ AppletManagerMovie = AppletManager.extend({
 });
 
 Applets = new AppletManagerMovie(10, 500);
+
+  $(window).blur(function() {
+      stop_animate();
+  });
+
+  $(window).focus(function() { animate();});
