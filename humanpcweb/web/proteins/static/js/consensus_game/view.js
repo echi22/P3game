@@ -112,7 +112,8 @@ GamePanel = Panel.extend({
     scripts = Applets.load_scripts(game_instance);
     var self = this;
     Applets.execute_scripts_all(scripts, function () {
-    self.switch_spin();
+    
+//      self.switch_spin();
 
     });
     _.each(game_instance.proteins, function (protein, i) {

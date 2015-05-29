@@ -112,7 +112,7 @@ Application = Base.extend({
     this.view = new View(this);
     // TODO make applets a parameter
     this.applets = Applets;
-
+   
   },
   initialize: function () {
     this.model = 0;
