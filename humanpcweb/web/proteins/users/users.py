@@ -32,9 +32,9 @@ def create(request,username,email,password,first_name,anonymous,birthday,knows_p
     user = User.objects.create_user(username,email,password)
     user.first_name=first_name
     user.save()
-    profile=UserProfile(user=user,anonymous=anonymous,game=0,level=0,points=0,user_level=1,best_score_in_level=0,birthday=birthday,knows_proteins=knows_proteins)
+    profile=UserProfile(user=user,anonymous=anonymous,game=0,level=0,birthday=birthday,knows_proteins=knows_proteins,level_attempt=0)    
+    profile.score = Score.for_user(user, 0, 0).save()
     profile.save()
-    Score.for_user(user, 0, 0).save()
     user = authenticate(username=username, password=password)
     auth.login(request, user)
 def register(request):

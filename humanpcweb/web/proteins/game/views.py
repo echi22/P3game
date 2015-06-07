@@ -110,24 +110,25 @@ def save_comparison(selected, game_instance, user, order):
     percentage = round((profile.get_correct_comparisons() * 100) / profile.proteins_compared(), 2)
   except ZeroDivisionError:
     percentage = 0
-  c = Comparison(selected=selected, game_instance=game_instance, user=user, order=order, accuracy=percentage, score = profile.score)
+  c = Comparison(selected=selected, game_instance=game_instance, user=user, order=order, accuracy=percentage, score = profile.get_score())
   c.save()
   
-  profile.score.chose(game_instance.choose(selected))
-  profile.score.save()
+  profile.get_score().chose(game_instance.choose(selected,profile.get_score().game_type))
+  profile.get_score().save()
 
 
 def get_game_instances_json(request):
   generator = ClassLoader().load(settings.game_instances_generator_module, settings.game_instances_generator_klass)()
   profile = request.user.get_profile()
   level = profile.level 
-  game = profile.game
   level_attempt = profile.level_attempt
 #  game_instances = list(generator.get_game_instances_not_played(game, level, request.user))
   game_instances = list();
   
   game_ins = list(generator.get_game_instances_not_played(level_attempt, level, request.user))
-  for x in range(profile.score.game_instances_played, 10):
+  print game_ins
+  print profile.get_score().game_instances_played
+  for x in range(10 - len(game_ins) , 10):
     game_instances.append(game_ins.pop())
     print x
 #  shuffle(game_instances) 
@@ -145,9 +146,11 @@ class GetGameScore(forms.Form):
 def get_game_score(request):
   form = GetGameScore(request.GET)
   if form.is_valid():
-    level = form.cleaned_data['level']
-    game = form.cleaned_data['game']
-    game_score = Score.objects.get(user=request.user, level=level, game=game)
+    #level = form.cleaned_data['level']
+    #game = form.cleaned_data['game']
+    #game_score = Score.objects.get(user=request.user, level=level, game=game)
+    
+    game_score = request.user.get_profile().get_score()
     result = game_score.json()
     return HttpResponse(result, mimetype='application/json')
   else:
@@ -173,7 +176,7 @@ def get_game_score_for_user(profile):
     percentage = round((profile.get_correct_comparisons() * 100) / profile.proteins_compared(), 2)
   except ZeroDivisionError:
     percentage = 0
-  result = '{"best_score": "%d", "user_level": %d, "avg_score":%f}' % (profile.best_score_in_level, profile.user_level, percentage)
+  result = '{"user_level": %d, "avg_score":%f}' % ( profile.level, percentage)
   return result 
 def get_game_scores_for_user(request):
   profile = request.user.get_profile()    
