@@ -18,7 +18,7 @@ class UserProfile(models.Model):
   user = models.OneToOneField(User)
   anonymous = models.BooleanField()
   game= models.IntegerField()
-  score = models.ForeignKey(Score)
+  score = models.ForeignKey('Score',null=True,related_name="score")
   #is the level of proteins (from 1 to 10) in wich the user is playing
   level= models.IntegerField()
   #is the real user level
@@ -47,14 +47,14 @@ class UserProfile(models.Model):
   def new_game(self):
       self.game+=1      
       self.save()
-      self.score = Score.for_user(self.user, profile.game, profile.level).save()   
+      self.score = Score.for_user(self.user, self.game, self.level).save()   
   def reset_score(self):
       self.game=0
       self.level=0
       self.points = 0
       self.user_level = 0
       self.save()
-      self.score = Score.for_user(self.user, profile.game, profile.level).save()   
+      self.score = Score.for_user(self.user, self.game, self.level).save()   
       
 class Protein(models.Model):
   name = models.CharField(max_length=200)
@@ -107,7 +107,7 @@ class GameInstance(models.Model):
             cath=cath.json()
         else:
             cath='"none"'
-        result =  '{"id": %d, "game": %d, "level": %d, "proteins": %s, "votes"men called: %s, "scop": %s, "cath": %s}' % (self.id,self.game,self.level, proteins, votes, self.different.json(), cath)
+        result =  '{"id": %d, "level_attempt": %d, "level": %d, "proteins": %s, "votes"men called: %s, "scop": %s, "cath": %s}' % (self.id,self.level_attempt,self.level, proteins, votes, self.different.json(), cath)
         print result.replace("men called","")
         return result.replace("men called","")
     def get_votes(self):
@@ -134,7 +134,7 @@ class Comparison(models.Model):
   game_instance = models.ForeignKey(GameInstance)
   order = models.CharField(max_length=100)
   accuracy = models.FloatField()
-  score = models.ForeignKey(Score)
+  score = models.ForeignKey('Score')
   def json(self):
       return '{"user": %d, "game_instance": %d}' % (self.user.id,self.game_instance.id)
 class ComparisonProtein(models.Model):
@@ -186,30 +186,32 @@ class Score(models.Model):
     game_instances_played=models.IntegerField()
     game_instances_correct=models.IntegerField()
     game= models.IntegerField()
-    comparisons = models.ManyToMany(Comparison)
+    comparisons = models.ManyToManyField('Comparison',related_name='comparisons')
     level= models.IntegerField()
-    game_type = models.CharField(max_length=200,choices=GameType)
+    game_type = models.CharField(max_length=200)
     @staticmethod
     def for_user(user, game,level):
         return Score(user=user,game_instances_played=0, game_instances_correct=0, game= game, level =level)
     def chose(self, result):
-     self.game_instances_played+=1     
-     profile=self.user.get_profile() 
-     if(result== Result.win):
-        self.game_instances_correct+=1     
-        profile.save()      
-     if(self.game_instances_played == settings.levels_per_game):                        
-        if(profile.game_instances_correct >= settings.game_instances_correct_to_level_up):                
-            profile.level+=1
-        else:
-            profile.level_attempt = (profile.level_attempt + 1)  % settings.max_attempts_per_level
-        profile.new_game()                    
-    profile.save()
+      self.game_instances_played+=1     
+      profile=self.user.get_profile() 
+      if(result== Result.win):
+         self.game_instances_correct+=1     
+         profile.save()      
+      if(self.game_instances_played == settings.levels_per_game):                        
+         if(self.game_instances_correct >= settings.game_instances_correct_to_level_up):                
+             profile.level+=1
+             profile.level_attempt = 0
+         else:
+             profile.level_attempt = (profile.level_attempt + 1)  % settings.max_attempts_per_level
+         profile.new_game()     
+      self.save()   
+      profile.save()
 
     def efficacy(self):
       return self.game_instances_correct*100/self.game_instances_played if not (self.game_instances_played==0) else 0
     def json(self):
-        return '{"user": "%s", "game_instances_played": %d,"game_instances_correct": %d,"game": %d,"level": %d,"user_level": %d}' % (self.user.username,self.game_instances_played,self.game_instances_correct,self.game,self.level,self.user_level)
+        return '{"user": "%s", "game_instances_played": %d,"game_instances_correct": %d,"game": %d,"level": %d}' % (self.user.username,self.game_instances_played,self.game_instances_correct,self.game,self.level)
 def list_to_json(l):
     return "["+(",".join(l))+"]"
 

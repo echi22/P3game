@@ -41,7 +41,7 @@ class GameInstanceGenerator():
     def generate_game_instance(self, level, level_attempt):
       q1, q2, q3, c1,c1_index= self.generate_queries(level)
       list,different=self.generate_classifications_from_queries(q1, q2, q3, c1,c1_index)      
-      gi=GameInstance(p1=list[0].protein,p2=list[1].protein,p3=list[2].protein,different=different.protein,level=level,level_attempt=level_attempt,times_played=0)
+      gi=GameInstance(p1=list[0].protein,p2=list[1].protein,p3=list[2].protein,different=different.protein,different_movies=different.protein,level=level,level_attempt=level_attempt,times_played=0)
       return gi
     def is_repeated( self,game_instance):
       return GameInstance.objects.filter(p1= game_instance.p1).filter(p2= game_instance.p2).filter(p3= game_instance.p3).count()>0
