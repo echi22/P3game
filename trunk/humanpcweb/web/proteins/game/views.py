@@ -26,13 +26,14 @@ from web.proteins.models import ComparisonProtein
 from web.proteins.models import GameInstance
 from web.proteins.models import Protein
 from web.proteins.models import Score
+from web.proteins.models import GameType
 from web.proteins.models import list_to_json
 from web.utility import ClassLoader
 logger = logging.getLogger(__name__)
 
 
 def get_game_settings(request):
-  result = '{"game_instances_per_level": %d,  "levels_per_game": %d, "game_instances_correct_to_level_up": %d, "game_type": "%s" }' % (settings.game_instances_per_level, settings.levels_per_game, settings.game_instances_correct_to_level_up, settings.game_type)
+  result = '{"game_instances_per_level": %d,  "levels_per_game": %d, "game_instances_correct_to_level_up": %d, "game_type": "%s", "max_level": %d }' % (settings.game_instances_per_level, settings.levels_per_game, settings.game_instances_correct_to_level_up, settings.game_type, settings.max_level)
   return HttpResponse(result, mimetype='application/json')
 
 def minutes_since_last_time_played(request):
@@ -48,16 +49,18 @@ class ChooseTypeForm(forms.Form):
   game_type = forms.CharField(max_length=100)
 def consensus_game(request):
   #Comparison.objects.all().delete()  
-  form = ChooseTypeForm(request.POST)
-  if form.is_valid():
-    game_type = form.cleaned_data["game_type"]
-    if game_type != "static" and game_type != "imgs" and game_type != "movies":
-      game_type = "static"
-  else:
-    return HttpResponseRedirect('/')
-#    game_type = "applet_static"
-  settings.game_type = game_type
-  print game_type
+#  form = ChooseTypeForm(request.POST)
+ # if form.is_valid():
+ #   game_type = form.cleaned_data["game_type"]
+  #  if game_type != "static" and game_type != "imgs" and game_type != "movies":
+   #   game_type = "static"
+ # else:
+  #  return HttpResponseRedirect('/')
+  game_type = request.user.get_profile().get_score().game_type
+  if(game_type == GameType.static):
+    settings.game_type = 'static'
+  elif (game_type== GameType.movies):
+    settings.game_type = 'movies'
   if request.user.is_anonymous():
     return HttpResponseRedirect('/users/login_or_register')
   if(Protein.objects.count() < 3):
@@ -66,7 +69,7 @@ def consensus_game(request):
   if(minutes_since_last_time_played(request) > 120):
     profile = request.user.get_profile()
     profile.new_game()
-  c = {"comparisons_needed": 5000000, "comparisons_made": Comparison.objects.count(), "game_type":game_type}
+  c = {"comparisons_needed": 5000000, "comparisons_made": Comparison.objects.count(), "game_type":settings.game_type}
   c.update(csrf(request))
   return render_to_response('consensus_game/play.html', c, context_instance=RequestContext(request))
   
@@ -114,6 +117,7 @@ def save_comparison(selected, game_instance, user, order):
   c.save()
   
   profile.get_score().chose(game_instance.choose(selected,profile.get_score().game_type))
+  profile.get_score().comparisons.add(c)
   profile.get_score().save()
 
 
@@ -126,11 +130,8 @@ def get_game_instances_json(request):
   game_instances = list();
   
   game_ins = list(generator.get_game_instances_not_played(level_attempt, level, request.user))
-  print game_ins
-  print profile.get_score().game_instances_played
   for x in range(10 - len(game_ins) , 10):
     game_instances.append(game_ins.pop())
-    print x
 #  shuffle(game_instances) 
   result = [game_instance.json2() for game_instance in game_instances]
   
@@ -185,7 +186,6 @@ def get_game_scores_for_user(request):
 
 def get_game_scores_for_user_old(request):
   number_of_games = Score.objects.filter(user=request.user).order_by("-game")[0].game
-  print number_of_games
   best_score = 0
   total_score = 0
   total_played = 0
@@ -246,7 +246,6 @@ def show_highscore_table(request):
       game_type = "static"
   scores = []
   newList = []
-  print game_type
   for p in User.objects.all():      
         
     try:
@@ -258,5 +257,4 @@ def show_highscore_table(request):
   sorted_scores = sorted(scores, key=lambda k: (-k['user_level'], -k['avg_score']))
   c = {"sorted_scores":sorted_scores, "game_type" : game_type}
   c.update(csrf(request))
-  print c
   return render_to_response('consensus_game/highscore_table.html', c, context_instance=RequestContext(request))

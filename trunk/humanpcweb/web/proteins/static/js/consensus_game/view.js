@@ -100,8 +100,6 @@ GamePanel = Panel.extend({
   clear_gui: function () {
     $(".protein").removeClass("incorrect correct tie");
     $(".votes").removeClass("incorrect_bg correct_bg tie_bg");
-//    $("#send").hide();
-//    $("#reload").show();
     $("#send").addClass("flip");
     $("#reload").removeClass("flip");
     $(".selectButton").show();
@@ -138,17 +136,21 @@ GamePanel = Panel.extend({
 
     $("#protein" + App.game_instances_manager.get_game_instance().different_index).addClass("correct");
     $("#score_container" + App.game_instances_manager.get_game_instance().different_index).addClass("correct_bg");
-//    $("#send").show();
     $("#send").removeClass("flip");
     $("#reload").addClass("flip");
-    if (App.game_score.level == (App.game_settings.levels_per_game - 1)) {
-
-      soundManager.play("finished_game");
-      $("#send").text("Volver a jugar");
+    if (App.game_score.game_instances_played == (App.game_settings.levels_per_game - 1)) {
+      if(App.game_score.game_instances_correct >= App.game_settings.game_instances_correct_to_level_up){
+        soundManager.play("finished_game");
+        if(App.game_score.level != App.game_settings.max_level-1){
+          $("#send").text("Siguiente Nivel");
+        }else{
+          $("#send").text("Felicitaciones!");
+        }
+      }else{
+        $("#send").text("Volver a jugar");
+      }
       $("#send").click(this.play_again);
     }
-
-//    $("#reload").hide();
     $(".selectButton").hide();
   },
   play_again: function(){
@@ -263,23 +265,26 @@ ScorePanel = Panel.extend({
     for (var i = 0; i < game_scores.length; i++) {
       this.show_level_score(game_scores[i]);
     }
-    $("#score").text(this.application.user.profile.points);
+    $("#score").text(this.application.game_score.game_instances_correct);
   },
   update_best_and_avg: function (game_scores) {
     $("#best_score").text(game_scores.best_score);
-    $("#user_level").text(game_scores.user_level);
+    if(App.game_score.game_instances_played != App.game_settings.levels_per_game-1)
+      $("#user_level").text(game_scores.user_level);
     $("#avg_score").text(game_scores.avg_score + "%");
   },
   show_level_score: function (game_score) {
-    for (var i = 0; i < game_score.game_instances_correct; i++) {
-      $("#instance_" + game_score.level + "_" + i).removeClass("playing_score circle correct_score incorrect_score").addClass("circle correct_score");
+    var comparisons = eval(game_score.comparisons);
+    for (var i = 0; i < comparisons.length; i++) {
+      if(comparisons[i] == "true")
+        $("#instance_" + i + "_0").removeClass("playing_score circle correct_score incorrect_score").addClass("circle correct_score");
+      else
+        $("#instance_" + i + "_0").removeClass("playing_score circle correct_score incorrect_score").addClass("circle incorrect_score");
     }
-    for (var i = game_score.game_instances_correct; i < game_score.game_instances_played; i++) {
-      $("#instance_" + game_score.level + "_" + i).removeClass("playing_score circle correct_score incorrect_score").addClass("circle incorrect_score");
-    }
+   
   },
   current_id: function () {
-    return "#instance_" + this.current_level + "_" + (this.current_game_instance);
+    return "#instance_" + this.current_game_instance + "_0";
   },
   mark_as_playing: function () {
     this.update_level_and_game_instance();
@@ -295,8 +300,7 @@ ScorePanel = Panel.extend({
       var klass = "incorrect_score";
     }
     $(this.current_id()).addClass(klass);
-    if (App.user.profile.level > 0)
-      $("#score").text(this.application.user.profile.points);
+    
   }
 });
 RepresentationPanel = Panel.extend({
