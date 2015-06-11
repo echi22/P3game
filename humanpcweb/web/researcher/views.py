@@ -1,5 +1,5 @@
 
-from web.proteins.models import GameInstance, UserProfile, Score
+from web.proteins.models import GameInstance, UserProfile, Score, Comparison, GameType
 from web.proteins.models import CathClassification
 from django.contrib import messages
 import logging
@@ -312,4 +312,43 @@ def clear_classification(request):
 def clear_all(model):
       while model.objects.all().count() > 0:
         q = model.objects.all().values('id')[:999]
-        model.objects.filter(id__in=q).delete()      
+        model.objects.filter(id__in=q).delete()   
+
+class ChooseTypeForm(forms.Form):
+  game_type = forms.CharField(max_length=100)
+def update_corrects(request):
+  form = ChooseTypeForm(request.GET)
+  if form.is_valid():
+    game_type = form.cleaned_data["game_type"]
+    if game_type == "movies":
+      game_type_enum = GameType.movies
+    else:
+      game_type_enum = GameType.static
+    for gi in GameInstance.objects.filter(times_played__gte=1):
+      votes = gi.get_votes_update(game_type_enum)
+      max_votes = max(votes)
+      if max_votes != 0:
+        positions = [i for i, j in enumerate(votes) if j == max_votes]
+        print "------------------------"
+        print game_type
+        print " votos: "
+        print votes
+        print gi.proteins()[0].id
+        print gi.proteins()[1].id
+        print gi.proteins()[2].id
+        print " pero wins: "
+        print gi.proteins()[positions[0]].id
+        print " antes movies: "
+        print gi.different_movies.id
+        print " antes static: "
+        print gi.different_static.id
+        print "------------------------"
+        if (game_type_enum == GameType.static):
+          gi.different_static = gi.proteins()[positions[0]]
+        elif (game_type_enum == GameType.movies):
+          gi.different_movies = gi.proteins()[positions[0]]
+        gi.save()
+    return HttpResponseRedirect("/researcher/")
+  else:
+    return HttpResponseRedirect('/')
+  

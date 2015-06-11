@@ -118,14 +118,12 @@ def _class(request, id):
   _class = Class(id)
   f = _class.children()
   route = _class.route()
-  print route
   return render_to_response('browser/class.html', {"classes":c, "folds":f, "class":_class}, context_instance=RequestContext(request))
 
 @id_parameter
 def fold(request, id):
   fold = Fold(id)
   route = fold.route()
-  print route
   return render_to_response('browser/fold.html', {"route": route, "classes":Class.classes(), "level":fold}, context_instance=RequestContext(request))
 
 
@@ -134,7 +132,6 @@ def superfamily(request, id):
   superfamily = SuperFamily(id)
   route = superfamily.route()
   context = {"route": route, "classes":Class.classes(), "level":superfamily}
-  print context ["route"]
   return render_to_response('browser/superfamily.html', context, context_instance=RequestContext(request))
 
 @id_parameter

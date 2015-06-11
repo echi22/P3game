@@ -78,6 +78,7 @@ GameType=Enumeration('GameType',['movies','static','images'])
 class GameInstance(models.Model):
     different=models.ForeignKey(Protein,related_name="different")
     different_movies=models.ForeignKey(Protein,related_name="different_movies")
+    different_static=models.ForeignKey(Protein,related_name="different_static")
     p1=models.ForeignKey(Protein,related_name="p1")
     p2=models.ForeignKey(Protein,related_name="p2")
     p3=models.ForeignKey(Protein,related_name="p3")
@@ -108,7 +109,6 @@ class GameInstance(models.Model):
         else:
             cath='"none"'
         result =  '{"id": %d, "level_attempt": %d, "level": %d, "proteins": %s, "votes"men called: %s, "scop": %s, "cath": %s}' % (self.id,self.level_attempt,self.level, proteins, votes, self.different.json(), cath)
-        print result.replace("men called","")
         return result.replace("men called","")
     def get_votes(self):
         vote=[]
@@ -116,11 +116,17 @@ class GameInstance(models.Model):
         vote.append(Comparison.objects.filter(game_instance=self).filter(selected=self.p2.id).count())
         vote.append(Comparison.objects.filter(game_instance=self).filter(selected=self.p3.id).count())
         return vote
+    def get_votes_update(self, game_type):
+        vote=[]
+        vote.append(Comparison.objects.filter(game_instance=self).filter(score__game_type=game_type).filter(selected=self.p1.id).count())
+        vote.append(Comparison.objects.filter(game_instance=self).filter(score__game_type=game_type).filter(selected=self.p2.id).count())
+        vote.append(Comparison.objects.filter(game_instance=self).filter(score__game_type=game_type).filter(selected=self.p3.id).count())
+        return vote
     def choose(self,selected,game_type):
         if(game_type == GameType.movies):
           correct = self.different_movies
         else:
-          correct = self.different
+          correct = self.different_static
         if selected.id== correct.id:
             return Result.win
         else:
@@ -135,6 +141,11 @@ class Comparison(models.Model):
   order = models.CharField(max_length=100)
   accuracy = models.FloatField()
   score = models.ForeignKey('Score')
+  def is_correct(self):
+    if self.score.game_type == GameType.static:
+      return (self.selected.id == self.game_instance.different_static.id)
+    elif self.score.game_type== GameType.movies:
+      return (self.selected.id == self.game_instance.different_movies.id)
   def json(self):
       return '{"user": %d, "game_instance": %d}' % (self.user.id,self.game_instance.id)
 class ComparisonProtein(models.Model):
@@ -188,10 +199,11 @@ class Score(models.Model):
     game= models.IntegerField()
     comparisons = models.ManyToManyField('Comparison',related_name='comparisons')
     level= models.IntegerField()
-    game_type = models.CharField(max_length=200)
+    game_type = models.IntegerField()
     @staticmethod
     def for_user(user, game,level):
-        return Score(user=user,game_instances_played=0, game_instances_correct=0, game= game, level =level)
+        game_type = ((user.id + level) % 2)
+        return Score(user=user,game_instances_played=0, game_instances_correct=0, game= game, level =level,game_type=game_type)
     def chose(self, result):
       self.game_instances_played+=1     
       profile=self.user.get_profile() 
@@ -200,18 +212,25 @@ class Score(models.Model):
          profile.save()      
       if(self.game_instances_played == settings.levels_per_game):                        
          if(self.game_instances_correct >= settings.game_instances_correct_to_level_up):                
-             profile.level+=1
-             profile.level_attempt = 0
+              if(profile.level < settings.max_level):
+                profile.level+=1
+              else:
+                profile.level = 0
+              profile.level_attempt = 0
          else:
              profile.level_attempt = (profile.level_attempt + 1)  % settings.max_attempts_per_level
          profile.new_game()     
       self.save()   
       profile.save()
-
+    def json_comparisons(self):
+      comparison = []
+      for c in self.comparisons.all():
+        comparison.append(str(c.is_correct()).lower())
+      return comparison
     def efficacy(self):
       return self.game_instances_correct*100/self.game_instances_played if not (self.game_instances_played==0) else 0
     def json(self):
-        return '{"user": "%s", "game_instances_played": %d,"game_instances_correct": %d,"game": %d,"level": %d}' % (self.user.username,self.game_instances_played,self.game_instances_correct,self.game,self.level)
+        return '{"user": "%s", "game_instances_played": %d,"game_instances_correct": %d,"game": %d,"level": %d, "comparisons": "%s"}' % (self.user.username,self.game_instances_played,self.game_instances_correct,self.game,self.level, self.json_comparisons())
 def list_to_json(l):
     return "["+(",".join(l))+"]"
 
