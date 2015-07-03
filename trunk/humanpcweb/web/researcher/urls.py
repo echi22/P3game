@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     url(r'^clear_classification$','researcher.views.clear_classification'),
     url(r'^update_corrects$','researcher.views.update_corrects'),
     url(r'^simulate_cath$','researcher.views.simulate_cath'),
+    url(r'^select_data_set$','researcher.views.select_data_set'),
     url(r'^$','researcher.views.index'),
     )

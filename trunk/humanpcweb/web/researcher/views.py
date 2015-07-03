@@ -5,9 +5,10 @@ from django.contrib import messages
 import logging
 import os.path
 import tempfile
+import random
 from zipfile import BadZipfile
 from zipfile import ZipFile
-
+from django.db.models import Count, Avg
 from django import forms
 from django.core.context_processors import csrf
 from django.http import HttpResponse
@@ -352,3 +353,74 @@ def update_corrects(request):
   else:
     return HttpResponseRedirect('/')
   
+def select_data_set(request):
+  q1=Classification.objects.values('level4').order_by().annotate(level4_count=Count('level4')).filter(level4_count__gt=1);
+  l = []
+  
+  for item in q1:
+    l.append(item["level4"]) 
+  l = sorted(l)
+  l = filter_classes(l)
+  l2 = create_lista(l)  
+  l2 = filter_classes(l2)  
+  l3 = create_lista(l2)  
+  l3 = filter_classes(l3)
+  for x in l2[:]:
+    if(x[0:(x.rfind("."))] == "c.1"):
+      print x
+      l2.remove(x)
+  lfinal = []
+  print "l2"
+  print l2
+  completo = False
+  ant = ""
+  for x in l:
+    act = x[0:(x.rfind("."))]
+    if(act in l2):
+      if(not(completo) or (act != ant)):
+        if(act == ant):
+          completo = True
+        else:
+          completo = False
+        lfinal.append(x)
+    ant = act
+      
+  print lfinal
+  Protein.objects.all().update(in_data_set=False)
+  for i in lfinal:
+    print i
+    q=Classification.objects.filter(level4 = i)
+    for j in q:
+      j.protein.in_data_set = True
+      j.protein.save()
+  p = Protein.objects.filter(in_data_set=True)
+  print len(p)
+def create_lista(l):
+  l2 = []
+  for item in l:
+    l2.append(item[0:(item.rfind("."))])  
+  set_list = set(l2)
+  l2 = sorted(list(set_list))
+  return l2
+def filter_classes(l):
+  indexes = []
+  
+  clase = l[0][0:(l[0].rfind("."))]
+  clase_prev = l[1][0:(l[1].rfind("."))]
+  if(clase != clase_prev):
+    indexes.append(0)
+  for i in range(1,len(l)-1):
+    clase = l[i][0:(l[i].rfind("."))]
+    clase_prev = l[i-1][0:(l[i-1].rfind("."))]
+    clase_next = l[i+1][0:(l[i+1].rfind("."))]
+    if((clase != clase_prev) and (clase != clase_next)):
+      indexes.append(i)
+  clase = l[len(l)-1][0:(l[len(l)-1].rfind("."))]
+  clase_prev = l[len(l)-2][0:(l[len(l)-2].rfind("."))]
+  if(clase != clase_prev):
+    indexes.append(len(l)-1)  
+  for index in sorted(indexes, reverse=True):
+    del l[index]
+  return l
+
+    
