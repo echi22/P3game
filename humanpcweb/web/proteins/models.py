@@ -60,6 +60,7 @@ class Protein(models.Model):
   name = models.CharField(max_length=200)
   code = models.CharField(max_length=200)
   description = models.CharField(max_length=200)
+  in_data_set = models.BooleanField()
   def scop_code(self):
     #detect astral codes
     if(len(self.code) == 7):

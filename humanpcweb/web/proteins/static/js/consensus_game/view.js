@@ -399,7 +399,7 @@ TutorialPanel = Panel.extend({
 
     if ((this.first_time_playing() || this.askedToShowTutorial) && this.tutorialMessagesShowed < messages.length) {
 
-      $("#tutorialImage").hide();
+      
       _self = this;
       if (App.game_score.game_instances_played == 0) {
         var message = messages[this.tutorialMessagesShowed]
@@ -413,7 +413,7 @@ TutorialPanel = Panel.extend({
     } else {
       this.askedToShowTutorial = false;
       this.tutorialMessagesShowed = 0;
-      $("#tutorialImage").show();
+      
     }
   },
   first_wrong_guess: function (event, scored) {
