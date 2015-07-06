@@ -360,7 +360,7 @@ RepresentationPanel = Panel.extend({
 });
 TutorialPanel = Panel.extend({
   constructor: function (application) {
-    application.register_observer(new Observer(this.ask_for_tutorial, this), "asked_for_tutorial");
+    application.register_observer(new Observer(this.show_asked_tutorial, this), "asked_for_tutorial");
     application.register_observer(new Observer(this.show_tutorial_message, this), "game_instance_change");
     application.register_observer(new Observer(this.first_correct_guess, this), "selection_result_shown");
     application.register_observer(new Observer(this.first_wrong_guess, this), "selection_result_shown");
@@ -428,6 +428,11 @@ TutorialPanel = Panel.extend({
       this.show_message("¡Muy bien! La proteina que elegiste es la más diferente de acuerdo a la base de datos de "
               + " SCOP (Structural classification of proteins), una de las clasificaciones de proteinas más populares", "topRight");
     }
+  },
+  show_asked_tutorial:function (event) {
+   
+      this.show_message("En los círculos aparecen tres proteínas. Debes seleccionar la que te parece más diferente. Si tu selección coincide con la de expertos, sumas un punto. Cuando logras " + App.game_settings.game_instances_correct_to_level_up + " puntos en un juego, pasas de nivel.");
+    
   },
   votes_explanation: function (event, scored) {
     if (!this.is_nth_correct_guess(scored, 1)
