@@ -136,8 +136,8 @@ class ScopGameInstanceGenerator(GameInstanceGenerator):
       
       Level(1, 1),
       Level(1, 1),
-      Level(4, 3),
-      Level(4, 3),
+      Level(2, 2),
+      Level(2, 2),
       Level(3, 3),
       Level(3, 3),
       Level(4, 4),
@@ -181,11 +181,15 @@ class ScopGameInstanceGenerator(GameInstanceGenerator):
         current_level="level"+str(i)
         current_level2="level"+str(i+1)
         filter2[current_level]=vars(c1)[current_level]
-        filter4[current_level2]=vars(c1)[current_level2]
+        if(level.level < 4):
+          filter4[current_level2]=vars(c1)[current_level2]
         print filter2
         print filter4
       current_level="level"+str(level.level)
-      q2=Classification.objects.filter(protein__in_data_set=True).filter(**filter2).exclude(**filter4).exclude(id=c1.id)
+      if(level.level == 4):
+        q2=Classification.objects.filter(protein__in_data_set=True).filter(**filter2).exclude(id=c1.id)
+      else:
+        q2=Classification.objects.filter(protein__in_data_set=True).filter(**filter2).exclude(**filter4).exclude(id=c1.id)
       if(level.level<4):
         current_level="level"+str(level.level+1)
         exclude={current_level:vars(c1)[current_level]}
