@@ -10,13 +10,14 @@ def comparison_to_row( comparison, generator,cluster):
     protein_window_indexes= map(lambda i: int(i[1])-1,c.order.split("-"))
     protein_window_order= map(lambda i: gi.proteins()[i], protein_window_indexes)
     window= map(lambda p:p.code,protein_window_order)
-    result=[str(c.user),c.user.userprofile.birthday, c.user.userprofile.knows_proteins, c.selected.code,str(c.ts),str(c.user_level),str(c.accuracy)]+result+window
+    type = "estatico" if (c.score.game_type == 1) else "movimiento"
+    result=[str(c.user),c.user.userprofile.birthday, c.user.userprofile.knows_proteins,type, c.selected.code,str(c.ts),str(c.accuracy)]+result+window
     return ",".join(map(str,result))
 
 def generate_comparisons_csv():
     
     comparisons=Comparison.objects.order_by('ts')
-    header='username,birthday, saw_proteins_before, selected,timestamp,user_level,accuracy,'+CathSimulator.result_header()+',window_1,window_2,window_3'
+    header='username,birthday, saw_proteins_before,type, selected,timestamp,accuracy,'+CathSimulator.result_header()+',window_1,window_2,window_3'
     generator = GameInstanceGenerator.get_default_generator()
     cluster= Cluster(Cluster.default_path())
     result= map(lambda c: comparison_to_row(c, generator, cluster), comparisons)

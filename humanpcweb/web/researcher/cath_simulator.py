@@ -64,8 +64,9 @@ class  CathSimulator(object):
         return scop+ cath
     @staticmethod
     def result_header():
-         result="trio_id, game, level,shared, not_shared"
-         result+= ",p0,p1,p2,scop, cath,cluster,"
+         result="trio_id, level_attempt, level,shared, not_shared"
+         #result+= ",p0,p1,p2,scop, cath,cluster,"
+         result+= ",p0,p1,p2,scop, cath,"
          result+= ",".join( [ "scop-p%d-l%d" % (i,j+1) for i in range(3) for j in range(4)])
          result+= ","+ ( ",".join( [ "cath-p%d-l%d" % (i,j+1) for i in range(3) for j in range(4)]))
          return result
@@ -97,8 +98,8 @@ class  CathSimulator(object):
            cath= ""+str(4-comparator.get_distance_between_proteins(game_instance.p1,game_instance.p2))
         #scop= "%s(%d)"  % (game_instance.different.code, game_instance.index_of_protein(game_instance.different))
         scop= str(game_instance.different.code)
-        result =[game_instance.id, game_instance.game, game_instance.level,str(level.level),str(level.sublevel)] 
-        result+=map(lambda p:p.code,game_instance.proteins()) +[ scop, cath, cluster_choice]+ classifications 
+        result =[game_instance.id, game_instance.level_attempt, game_instance.level,str(level.level),str(level.sublevel)] 
+        result+=map(lambda p:p.code,game_instance.proteins()) +[ scop, cath]+ classifications 
         return result,different_cath, different_clusters
     
     def simulate(self, generator):
