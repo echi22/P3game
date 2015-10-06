@@ -4,8 +4,8 @@
 
 import os.path
 
-BASE_PATH='C:/Users/Tincho/workspace/trunk/humanpcweb/web/'
-STATIC_PATH=os.path.join( BASE_PATH,'proteins/static/') #folder where the static files should be collected in
+BASE_PATH='/home/hclass/webapps/p3tesina/humanpcweb/web/'
+STATIC_PATH='/home/hclass/webapps/static_p3tesina/' #folder where the static files should be collected in
 SETTINGS_PATH=os.path.join( BASE_PATH,"config/")
 
 

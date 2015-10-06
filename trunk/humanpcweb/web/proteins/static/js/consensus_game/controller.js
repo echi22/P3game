@@ -110,6 +110,7 @@ function load_all_proteins_script_movies(game_instances) {
   var scripts = ["", "", ""];
   for (var h = 0; h < 3; h++) {
     scripts[h] = " load trajectory '" + Config.static_url + "proteins/movies/" + game_instance.proteins[h].name + "';;" + default_representation;
+    scripts[h] = scripts[h].replace(".pdb",".zip"); 
   }
 
   return scripts;
