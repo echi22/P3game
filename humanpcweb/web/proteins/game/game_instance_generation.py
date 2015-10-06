@@ -138,10 +138,10 @@ class ScopGameInstanceGenerator(GameInstanceGenerator):
       Level(1, 1),
       Level(2, 2),
       Level(2, 2),
-      Level(3, 3),
-      Level(3, 3),
       Level(4, 4),
       Level(4, 4),
+      Level(3, 3),
+      Level(3, 3),
       ]
     def user_level_to_level(self,level):
       return self.mapping()[level]
