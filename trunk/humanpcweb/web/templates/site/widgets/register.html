@@ -1,7 +1,7 @@
     <div class="puff border_blue equalheight" style="height: 410px;">
             <h2 class="titleLarge padding_bottom8 margin_bottom border_bottom">Registrarse para jugar</h2>
 
-    <form action="/users/register" method="post">
+    <form action="/users/register" method="post" id="register_form">
                                      {% csrf_token %}
          <table>
              <tr>
@@ -20,7 +20,7 @@
                  <td>
 
                     <label>
-                        Contraseña:
+                      Contrase&ntilde;a:
                     </label>
                 </td>
                  <td>
@@ -31,7 +31,7 @@
                  <td>
 
                     <label>
-                         Repetir Contraseña:
+                      Repetir Contrase&ntilde;a:
                     </label>
                 </td>
                  <td>
@@ -57,7 +57,7 @@
                     </label>
                   </td>
                  <td>
-                    <input type="date" placeholder="dd/mm/aaaa" lang="es" class="nice-input" name="birthday" {% if birthday.data != 'none' %}value="{{birthday.data}}"{%endif%}>
+                    <input type="date" placeholder="dd/mm/aaaa" lang="es" class="nice-input" id="birthday" name="birthday" {% if birthday.data != 'none' %}value="{{birthday.data}}"{%endif%}>
                 </td>
              </tr>
              <tr>
@@ -74,7 +74,7 @@
                  <td colspan="2">
 
                    <label>
-                     <i>Entiendo que el juego está en etapa de desarrollo y, si bien es estable, podría experimentar algún tipo de falla.</i> 
+                     <i>Entiendo que el juego est&aacute; en etapa de desarrollo y, si bien es estable, podr&iacute;a experimentar alg&uacute;n tipo de falla.</i> 
                     </label>
                   
                     <input type="checkbox"  name="game_is_beta">

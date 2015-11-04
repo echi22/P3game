@@ -179,3 +179,12 @@ function delete_item(array,item){
         }
     }
 }
+
+function check_date_format(){
+  var fecha = $("#birthday").val();
+  fecha = fecha.replace(/\//g, '-');
+  if(!fecha.match(/^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$/)){
+      fecha2 = fecha.substr(fecha.length - 4) + "-" + fecha.substr(3,2) + "-" + fecha.substr(0,2);
+      $("#birthday").val(fecha2);
+  }
+}
